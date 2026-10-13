@@ -1,0 +1,13 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+__pycache__/
+*.pyc
+.venv/
+
+# Never commit credentials
+*.token
+token*.txt
+*_TOKEN*
+.env
