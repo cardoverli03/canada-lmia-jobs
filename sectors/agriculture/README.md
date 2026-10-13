@@ -46,4 +46,25 @@
 - Oso Berry Farms Inc.: 141
 - Highline Produce Limited: 130
 
-Status column (ACTIVE / WATCH) is added during the verification phase.
+## Verification (the hunt) — batch 01, done 2026-10-13
+
+Top 18 hirers hunted via their official websites (Job Bank cross-check pending —
+jobbank.gc.ca tarpitted our sandbox IP on hunt day; method in `docs/HUNT-METHOD.md`,
+full evidence in `data/hunt/2026-10-13_agriculture_batch01.csv`).
+
+- **ACTIVE (3):** Fraisebec Inc. (emplois page: 200+ hires per harvest season, May-Oct,
+  interpreter-for-foreign-workforce roles, application form + phone + email),
+  Monette Farms Ltd. (live careers page, resume-upload application form, international
+  seasonal team 9 months-2 years), Les Jardins Vegibec Inc. (English careers page with
+  apply-now form).
+- Official site verified live, no public hiring channel (3): Jealous Fruits, Ferme Onésime
+  Pouliot (site documents foreign-worker housing), Caledon Produce Farms.
+- No verifiable official site found (9): Pitre, RGR Guinois, Goodyear Farm (a same-name
+  California nursery exists — NOT the employer), Oso Berry, Procyk, El Dorado,
+  2104052 Alberta Ltd (numbered company), Verger Thomson, Nutrableu.
+- Site exists but bot-walled (2): Fraisière Faucher (Cloudflare), Highline Mushrooms
+  West (Cloudflare). Unreachable from our network (1): Highline Produce.
+
+Status column (ACTIVE / WATCH / REPEAT / OLD) is folded into part files before the
+product phase. ACTIVE above = live application channel verified on the stated date,
+NOT a guarantee of current openings — full disclaimer in BIBLE.md section 6.
