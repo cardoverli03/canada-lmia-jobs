@@ -36,3 +36,19 @@ All notable changes to this repo. Dates use YYYY-MM-DD (owner timezone: Africa/D
   sections (hunt output survives future pipeline runs).
 - Hunt batches = top hirers only, for ACTIVE trust badges. Scope rule added to
   docs/HUNT-METHOD.md and BIBLE 3.3.
+
+## 2026-10-13 (session 3, filtering complete)
+
+- FILTERING STAGE COMPLETE: 5 new sectors cut from the long tail, all NOC codes taken
+  from official data rows (zero memory-invented codes):
+  manufacturing-industrial 527 / marketing-media-creative 229 / beauty-personal-services 92 /
+  education-teaching 86 / repair-maintenance 79.
+- Expansions: construction 1038->1133 (plumbers, electricians, steamfitters, HVAC, floor
+  covering, carpentry/mechanic supervisors); healthcare 364->376 (home support workers,
+  caregivers); tech-it 546->570 (computer network & web technicians); hospitality
+  1202->1239 (accommodation service managers, travel/tourism supervisors).
+- Coverage: 6,983 -> 8,164 of 8,790 rows (79.4% -> 92.9%). 626-row thin tail left
+  unassigned on purpose (civil eng, finance/accounting, pilots, HR - no coherent volume).
+- Bug caught in review: keyword regex "spa" matched "Aero**spa**ce engineers" -> fixed
+  with word boundary \bspa\b. Lesson logged in BIBLE: short keywords need \b.
+- 16 sector folders regenerated with self-check links; README hunt sections preserved.

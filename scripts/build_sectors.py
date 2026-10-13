@@ -70,15 +70,20 @@ SECTOR_DEFS = {
     "healthcare-nursing": {
         "noc": {"31100","31101","31102","31110","31111","31112","31200","31201","31202","31203",
                 "31300","31301","31302","32101","32102","32103","32104","32110","32111","32112",
-                "32120","32121","32200","32201","32202","33100","33101","33102","33103","33109"},
+                "32120","32121","32200","32201","32202","33100","33101","33102","33103","33109",
+                "44101"},
         "kw": [r"nurse", r"physician", r"doctor", r"dentist", r"dental", r"pharmac", r"physiother",
-               r"medical", r"paramedic", r"health", r"therapist", r"care aide", r"patient", r"midwife"],
+               r"medical", r"paramedic", r"health", r"therapist", r"care aide", r"patient", r"midwife",
+               r"home support", r"caregiver"],
     },
     "construction": {
         "noc": {"70010","72014","72106","72310","72400","72401","73100","73102","73110","73112",
-                "73200","73400","75110"},
+                "73200","73400","75110",
+                "72300","72200","72301","72402","73113","72013","72021"},
         "kw": [r"construction", r"carpenter", r"roofer", r"drywall", r"plasterer", r"concrete",
-               r"bricklayer", r"tilesetter", r"glazier", r"ironworker", r"insulator", r"crane oper"],
+               r"bricklayer", r"tilesetter", r"glazier", r"ironworker", r"insulator", r"crane oper",
+               r"plumber", r"electrician", r"steamfitter", r"pipefitter", r"sprinkler",
+               r"heating, refrigeration", r"floor covering"],
     },
     "transport-trucking": {
         "noc": {"73300","73301","72024","75101","72410","72411"},
@@ -86,9 +91,11 @@ SECTOR_DEFS = {
                r"material handler", r"shipping", r"forklift", r"dispatcher", r"chauffeur", r"taxi"],
     },
     "hospitality-food-service": {
-        "noc": {"60030","62020","62200","63200","63201","63202","65201","64300","64302","64314"},
+        "noc": {"60030","62020","62200","63200","63201","63202","65201","64300","64302","64314",
+                "60031","62022"},
         "kw": [r"cook", r"chef", r"kitchen", r"bartender", r"barista", r"baker", r"food counter",
-               r"food service", r"food and beverage", r"dishwash", r"restaurant", r"hotel front desk"],
+               r"food service", r"food and beverage", r"dishwash", r"restaurant", r"hotel front desk",
+               r"accommodation", r"hotel", r"tourism"],
     },
     "cleaning-landscaping": {
         "noc": {"65310","62024","85121"},
@@ -99,15 +106,47 @@ SECTOR_DEFS = {
         "kw": [r"retail", r"sales associate", r"salesperson", r"cashier", r"store clerk", r"merchandis"],
     },
     "tech-it": {
-        "noc": {"20012","21211","21221","21222","21223","21231","21232","21234","22221"},
+        "noc": {"20012","21211","21221","21222","21223","21231","21232","21234","22221","22220"},
         "kw": [r"software", r"developer", r"programmer", r"data scien", r"database",
                r"information system", r"cyber", r"web developer", r"systems analyst", r"devops",
-               r"user support"],
+               r"user support", r"computer network"],
     },
     "office-admin": {
         "noc": {"13100","13110","12200","12013","14100","14111","12101"},
         "kw": [r"administrative", r"receptionist", r"bookkeep", r"accounting technician",
                r"data entry", r"office clerk", r"secretary", r"records management"],
+    },
+    # --- sectors v1.5 (2026-10-13, built from the 1,807-row long tail; all NOC
+    # codes taken from the official data rows themselves, titles verified in-data) ---
+    "manufacturing-industrial": {
+        "noc": {"72100","72101","72102","72104","72311","72201","72422","72010",
+                "21310","21301","21321","22310","22301","22302","22312","22212","22100",
+                "94105","94106","94111","94124","94204","94212","95101","95104","95109",
+                "92013","90010"},
+        "kw": [r"machinist", r"machine operator", r"assembler", r"metal fabricat", r"plastic",
+               r"rubber", r"manufactur", r"woodworking", r"tool and die", r"industrial electrician",
+               r"electrical mechanic", r"forging", r"metalworking"],
+    },
+    "education-teaching": {
+        "noc": {"42202","41200","41220","41221"},
+        "kw": [r"early childhood", r"professor", r"lecturer", r"teacher", r"kindergarten", r"educator"],
+    },
+    "beauty-personal-services": {
+        "noc": {"63210","63211","60040"},
+        "kw": [r"hairstylist", r"hair stylist", r"barber", r"esthetician", r"electrologist",
+               r"beauty", r"salon", r"\bspa\b", r"personal service"],
+    },
+    "marketing-media-creative": {
+        "noc": {"11202","10022","41402","52120","51120","53121","55109","21233"},
+        "kw": [r"marketing", r"advertising", r"public relations", r"graphic design", r"web designer",
+              r"producer", r"director", r"choreographer", r"market research", r"performer", r"actor",
+              r"journalist", r"communications"],
+    },
+    "repair-maintenance": {
+        "noc": {"74203","72423","72404","72020","73201","22311"},
+        "kw": [r"automotive", r"heavy truck and equipment", r"motorcycle", r"all-terrain",
+              r"aircraft mechanic", r"aircraft inspector", r"building maintenance",
+              r"building superintendent", r"electronic service technician"],
     },
 }
 
@@ -123,6 +162,11 @@ KW_PRIORITY = [
     "retail-sales",
     "tech-it",
     "office-admin",
+    "manufacturing-industrial",
+    "education-teaching",
+    "beauty-personal-services",
+    "marketing-media-creative",
+    "repair-maintenance",
 ]
 
 MAX_PART_ROWS = 200

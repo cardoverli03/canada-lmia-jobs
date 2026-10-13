@@ -1,24 +1,24 @@
 # CONSTRUCTION - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **1038** | Unique employers: **980** | Parts: **6** (max 200 each)
-- Skill split: SKILLED 933, UNSKILLED 105 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
-- Live market signal (Job Bank, September 2026): 4006 postings, 7400 vacancies, median wage ~$33.0/hr equivalent
-  - Postings by province: Ontario 1005, British Columbia 911, Alberta 749
+- Total entries: **1133** | Unique employers: **1069** | Parts: **6** (max 200 each)
+- Skill split: SKILLED 1028, UNSKILLED 105 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
+- Live market signal (Job Bank, September 2026): 4654 postings, 8348 vacancies, median wage ~$34.45/hr equivalent
+  - Postings by province: Ontario 1163, British Columbia 1093, Alberta 861
 
 ## Entries by province
 
 | Province | Entries |
 |----------|---------|
-| ON | 350 |
-| QC | 266 |
-| BC | 203 |
-| AB | 158 |
+| ON | 372 |
+| QC | 285 |
+| BC | 245 |
+| AB | 167 |
+| NS | 15 |
 | MB | 15 |
-| NS | 14 |
 | SK | 12 |
-| NB | 7 |
-| FOREIGN-HQ | 5 |
+| NB | 8 |
+| FOREIGN-HQ | 6 |
 | PE | 4 |
 | NT | 3 |
 | NL | 1 |
@@ -40,6 +40,7 @@
 
 - Pioneer Construction Inc.: 25
 - EVR Operations Limited: 25
+- Contour Earthmoving Ltd: 22
 - Rulam Contracting Ltd.: 21
 - Rafat General Contractor Inc.: 20
 - Dynamic Concrete Pumping Inc.: 20
@@ -47,7 +48,6 @@
 - Lanco Aménagement inc.: 16
 - CLASSIC LANDSCAPES LIMITED: 14
 - PR Pomeroy Restoration & Construction (BC) Inc,: 14
-- Optimal Structural Formwork: 13
 
 ## Check it yourself (built into every part file)
 

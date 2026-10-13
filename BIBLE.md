@@ -102,29 +102,34 @@ Scope rule (owner decision 2026-10-13): we do NOT hand-verify every employer —
 
 ---
 
-## 4. SECTOR DEFINITIONS (all BUILT 2026-10-13, source 2026-Q1)
+## 4. SECTOR DEFINITIONS (16 sectors — v1.5 built 2026-10-13, source 2026-Q1)
 
-NOC 2021 5-digit codes from the Occupation column "NNNNN-Title". Assignment = NOC list match first, keyword fallback second (keyword priority order in `scripts/build_sectors.py`). Sector counts below are from 2026-Q1:
+NOC 2021 5-digit codes from the Occupation column "NNNNN-Title". Assignment = NOC list match first, keyword fallback second (keyword priority order in `scripts/build_sectors.py`). Every NOC code added in v1.5 was taken from the official data rows themselves (title verified in-data), never from memory. Sector counts below are from 2026-Q1:
 
 | Sector | Entries | Parts | Top jobs |
 |--------|---------|-------|----------|
 | agriculture | 2,270 | 12 | Harvesting labourers 1093, Livestock labourers 736 |
-| hospitality-food-service | 1,202 | 7 | Cooks 353, Restaurant managers 295, Food service supervisors 235 |
-| construction | 1,038 | 6 | Carpenters 162, Welders 156, Trades helpers 99 |
-| tech-it | 546 | 3 | Software developers 119, Software engineers 93 |
+| hospitality-food-service | 1,239 | 7 | Cooks 353, Restaurant managers 295, Food service supervisors 235 |
+| construction | 1,133 | 6 | Carpenters 162, Welders 156, Trades helpers 99 (+plumbers/electricians/steamfitters/HVAC) |
+| manufacturing-industrial | 527 | 3 | Machinists 102, Electrical mechanics 44, EE eng technologists 37 |
+| tech-it | 570 | 3 | Software developers 119, Software engineers 93 (+network technicians) |
 | transport-trucking | 503 | 3 | Transport truck drivers 207 |
-| healthcare-nursing | 364 | 2 | Nurse aides 131, GPs 59, RNs 26 |
+| healthcare-nursing | 376 | 2 | Nurse aides 131, GPs 59, RNs 26 (+home support workers/caregivers) |
 | office-admin | 329 | 2 | Admin officers 83, Accounting techs 67 |
 | retail-sales | 295 | 2 | Retail managers 139, Sales supervisors 103 |
+| marketing-media-creative | 229 | 2 | Advertising/marketing/PR 69, Graphic designers 46, Producers/directors 26 |
 | cleaning-landscaping | 248 | 2 | Landscaping labourers 87, Light duty cleaners 73 |
 | food-processing | 124 | 1 | Industrial butchers, Processing labourers |
+| beauty-personal-services | 92 | 1 | Services managers 46, Estheticians 23, Hairstylists/barbers 23 |
+| education-teaching | 86 | 1 | Early childhood educators 48, University professors 20 |
+| repair-maintenance | 79 | 1 | Building maintenance/superintendents 24, Mechanic-trade supervisors 19 |
 | fish-seafood | 64 | 1 | Fish/seafood plant workers, Aquaculture labourers |
 
-- Coverage: 6,983 of 8,790 rows (79.4%). **1,807 rows unassigned** (long tail: machinists, marketing, ECE, engineering, design...) — see `data/processed/unassigned_review.csv`. Future sector candidates: manufacturing-metal, personal-services, education.
+- Coverage: **8,164 of 8,790 rows (92.9%)**. **626 rows unassigned** (thin mixed-value tail: civil engineers 34, financial/accounting 44, air pilots 20, HR 15, logistics coordinators 23, printing, coaches, vets...) — see `data/processed/unassigned_review.csv`. Not enough coherent volume for honest standalone products; revisit if a future quarter grows any cluster.
 - Skill split (all rows): SKILLED 5,847 / UNSKILLED 2,943 (IRCC TEER table).
 - Agriculture rule unchanged: Program Stream == `Primary Agriculture` OR NOC in {80020, 82030, 84120, 85100, 85101, 85103, 21112}.
-- Every sector README includes a "Live market signal" line from the Job Bank Sept 2026 CSV (postings, vacancies, median wage, top provinces) — honest date-stamped market data, not promises.
-- SKILLED / UNSKILLED product packs: LAST phase, built by filtering the SkillLevel column. Higher price, never mixed with sector packs.
+- Every sector README includes a "Live market signal" line from the Job Bank Sept 2026 slim CSV + the self-check-links explainer. Hunt sections survive regeneration.
+- Keyword bug fixed 2026-10-13: "Aerospace engineers" matched regex `spa` (Aero**spa**ce) → word-boundary `\bspa\b` rule. Lesson: short keywords need `\b`.
 
 ---
 
@@ -184,6 +189,7 @@ Data quirks already handled (do not re-discover): title row + footer note rows i
 - **2026-10-13** — VERIFICATION PHASE STARTED (the Hunt). Method: headless browser (agent-browser, real Chromium) on jobbank.gc.ca, employer-name search, top Approved-Positions hirers first. Hunt logs stored in `data/hunt/` (one CSV per batch, date-stamped, verdict per employer: ACTIVE with posting evidence + URL, or no-live-posting-today). Only what the browser actually shows gets recorded. Never present WATCH as ACTIVE.
 - **2026-10-13** — Hunt batch 01 (agriculture top 18) executed via official employer websites (Job Bank tarpitted our IP). Results: 3 ACTIVE (Fraisebec, Monette Farms, Les Jardins Vegibec), 3 site-live-no-public-channel, 9 no-site-found, 2 bot-walled, 1 unreachable. SOP written: docs/HUNT-METHOD.md.
 - **2026-10-13** — OWNER DECISION — self-checking lists: hand-verifying all employers is rejected ("we can't be slaves for our business"). Pipeline v3: every row in every sector part file now carries JobBankCheck (pre-filled Job Bank employer search, newest first) + WebSearch (find official site) links. List verifies itself; hunt batches continue for TOP hirers only (ACTIVE badges = marketing proof of care). All 11 sectors regenerated with the two link columns.
+- **2026-10-13** — FILTERING COMPLETED to 92.9%: 5 new sectors cut from the 1,807-row long tail (manufacturing-industrial 527, marketing-media-creative 229, beauty-personal-services 92, education-teaching 86, repair-maintenance 79) + expansions (construction +95 with plumbers/electricians/steamfitters/HVAC/floor-covering; healthcare +12 caregivers; tech-it +24 network technicians; hospitality +37 accommodation/hotel). All NOC codes sourced from official data rows. 16 sectors total, 8,164/8,790 rows covered. 626-row thin tail left unassigned on purpose. Bug caught and fixed in review: regex `spa` matched "Aero**spa**ce" — word boundaries added.
 
 ---
 
@@ -194,15 +200,17 @@ Done:
 - 2026-Q1 EN raw file stored + provenance documented
 - Pipeline built (`scripts/build_sectors.py`) — all 11 sectors generated
 - Raw 46 MB Job Bank CSV deleted from local + history + GitHub (owner order)
+- Pipeline v3 done: self-check links (JobBankCheck + WebSearch) on every row of all sectors.
+- FILTERING STAGE COMPLETE: 16 sectors, 8,164/8,790 rows (92.9%), 626-row thin tail documented.
 - HUNT batch 01 done (agriculture top 18 by Approved Positions): 3 ACTIVE (Fraisebec,
   Monette Farms, Les Jardins Vegibec), 3 site-live-no-public-channel, 9 no-site-found,
   2 bot-walled, 1 unreachable. Evidence: `data/hunt/2026-10-13_agriculture_batch01.csv`.
 - Hunt SOP written: `docs/HUNT-METHOD.md` (verdict vocabulary, traps, toolchain).
 
 Next (in order):
-1. Hunt batches continue (top hirers only): agriculture ranks 19-50, then other sectors' top 10-15 — retry Job Bank cross-check each batch
+1. Hunt batches (top hirers only): manufacturing-industrial, construction, transport — retry Job Bank cross-check each batch
 2. Spot-check JobBankCheck link format live once Job Bank access returns
-3. Product phase: PDF layout (self-check links become clickable), CV templates, guides, cold emails, disclaimer pages
+3. Product phase (only on owner's GO): PDF layout (self-check links become clickable), CV templates, guides, cold emails, disclaimer pages
 4. Business phase: Selar (or alternative) store, pricing page, marketing content plan
 
 Standing rule for every future agent: update BIBLE.md (sections 4, 7, 8) after your work. Never break the info-not-promises rule.
