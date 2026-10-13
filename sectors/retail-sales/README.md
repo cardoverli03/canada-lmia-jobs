@@ -44,4 +44,6 @@
 - Spokes Bicycle Rentals & Espresso Bar Inc: 2
 - 7027622 Manitoba Inc: 2
 
-Status column (ACTIVE / WATCH) is added during the verification phase.
+## Check it yourself (built into every part file)
+
+Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.

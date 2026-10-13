@@ -1,3 +1,3 @@
-Entry,Employer,JobTitle,NOC,TEER,SkillLevel,City,ProvinceCode,Postal,Program Stream,Approved LMIAs,Approved Positions,Address
-1201,836488 Yukon Inc,Restaurant and food service managers,60030,0,SKILLED,Whitehorse,YT,Y1A 2C7,High Wage,1,1,"Whitehorse, YT Y1A 2C7"
-1202,837425 Yukon Inc.,Cooks,63200,3,SKILLED,Whitehorse,YT,Y1A 4Y9,Low Wage,1,1,"Whitehorse, YT Y1A 4Y9"
+Entry,Employer,JobTitle,NOC,TEER,SkillLevel,City,ProvinceCode,Postal,Program Stream,Approved LMIAs,Approved Positions,Address,JobBankCheck,WebSearch
+1201,836488 Yukon Inc,Restaurant and food service managers,60030,0,SKILLED,Whitehorse,YT,Y1A 2C7,High Wage,1,1,"Whitehorse, YT Y1A 2C7",https://www.jobbank.gc.ca/jobsearch/jobsearch?searchstring=%22836488%20Yukon%20Inc%22&locationstring=&sort=D,https://www.google.com/search?q=%22836488%20Yukon%20Inc%22%20Canada%20careers
+1202,837425 Yukon Inc.,Cooks,63200,3,SKILLED,Whitehorse,YT,Y1A 4Y9,Low Wage,1,1,"Whitehorse, YT Y1A 4Y9",https://www.jobbank.gc.ca/jobsearch/jobsearch?searchstring=%22837425%20Yukon%20Inc.%22&locationstring=&sort=D,https://www.google.com/search?q=%22837425%20Yukon%20Inc.%22%20Canada%20careers

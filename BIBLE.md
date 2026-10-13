@@ -82,9 +82,10 @@ Official caveats (from the dataset notes — repeat these to customers when rele
 
 ### 3.2 Columns of a processed entry (current CSV form, PDF layout later)
 
-`Entry, Employer, JobTitle, NOC, TEER, SkillLevel, City, ProvinceCode, Postal, Program Stream, Approved LMIAs, Approved Positions, Address`
+`Entry, Employer, JobTitle, NOC, TEER, SkillLevel, City, ProvinceCode, Postal, Program Stream, Approved LMIAs, Approved Positions, Address, JobBankCheck, WebSearch`
 
 - `SkillLevel`: SKILLED (TEER 0-3) / UNSKILLED (TEER 4-5), from the official IRCC TEER table. This column powers the future SKILLED and UNSKILLED product packs — no separate folder until that product phase.
+- `JobBankCheck` / `WebSearch` (added 2026-10-13, owner decision): ready-made self-check links built into every row. JobBankCheck opens jobbank.gc.ca pre-filled with a quoted employer search, newest first; WebSearch finds the employer's official site. The list verifies itself — buyers click and see the live situation. We do NOT verify 8,000+ employers by hand (that would be slavery); hunt batches stamp ACTIVE badges on top hirers only. Link URL shape to be spot-checked live once Job Bank access returns (sandbox IP tarpitted 2026-10-13).
 
 ### 3.3 Cardo Activity Score (verification phase — not started yet)
 
@@ -96,6 +97,8 @@ Every employer entry gets a status mark. Status text tags (no emojis in files):
 - `OLD`     — LMIA older than ~1 year, nothing live. Keep on list (still info), marked OLD.
 
 Rules: verification is done in batches, TOP hirers first. We verify what we can and stamp the date. We NEVER present WATCH as ACTIVE.
+
+Scope rule (owner decision 2026-10-13): we do NOT hand-verify every employer — that is slave work and the list doesn't need it. Every row ships with self-check links (JobBankCheck + WebSearch). Hunt batches verify top hirers only, for trust badges and marketing proof. Verification effort stays proportional: hours per sector, not weeks.
 
 ---
 
@@ -179,6 +182,8 @@ Data quirks already handled (do not re-discover): title row + footer note rows i
 - **2026-10-13** — Pipeline v2 built. All 11 sectors generated: agriculture 2,270; hospitality-food-service 1,202; construction 1,038; tech-it 546; transport-trucking 503; healthcare-nursing 364; office-admin 329; retail-sales 295; cleaning-landscaping 248; food-processing 124; fish-seafood 64. 1,807 long-tail rows unassigned for future sectors.
 - **2026-10-13** — Raw Job Bank Sept 2026 CSV (46 MB) deleted from local repo, git history (commit amended) and GitHub (force push) on the owner's order. Slim market-signal derivative kept. Rule added: raw Job Bank dumps are never committed again.
 - **2026-10-13** — VERIFICATION PHASE STARTED (the Hunt). Method: headless browser (agent-browser, real Chromium) on jobbank.gc.ca, employer-name search, top Approved-Positions hirers first. Hunt logs stored in `data/hunt/` (one CSV per batch, date-stamped, verdict per employer: ACTIVE with posting evidence + URL, or no-live-posting-today). Only what the browser actually shows gets recorded. Never present WATCH as ACTIVE.
+- **2026-10-13** — Hunt batch 01 (agriculture top 18) executed via official employer websites (Job Bank tarpitted our IP). Results: 3 ACTIVE (Fraisebec, Monette Farms, Les Jardins Vegibec), 3 site-live-no-public-channel, 9 no-site-found, 2 bot-walled, 1 unreachable. SOP written: docs/HUNT-METHOD.md.
+- **2026-10-13** — OWNER DECISION — self-checking lists: hand-verifying all employers is rejected ("we can't be slaves for our business"). Pipeline v3: every row in every sector part file now carries JobBankCheck (pre-filled Job Bank employer search, newest first) + WebSearch (find official site) links. List verifies itself; hunt batches continue for TOP hirers only (ACTIVE badges = marketing proof of care). All 11 sectors regenerated with the two link columns.
 
 ---
 
@@ -189,12 +194,15 @@ Done:
 - 2026-Q1 EN raw file stored + provenance documented
 - Pipeline built (`scripts/build_sectors.py`) — all 11 sectors generated
 - Raw 46 MB Job Bank CSV deleted from local + history + GitHub (owner order)
-- HUNT batch 01 (agriculture, top hirers) — see `data/hunt/`
+- HUNT batch 01 done (agriculture top 18 by Approved Positions): 3 ACTIVE (Fraisebec,
+  Monette Farms, Les Jardins Vegibec), 3 site-live-no-public-channel, 9 no-site-found,
+  2 bot-walled, 1 unreachable. Evidence: `data/hunt/2026-10-13_agriculture_batch01.csv`.
+- Hunt SOP written: `docs/HUNT-METHOD.md` (verdict vocabulary, traps, toolchain).
 
 Next (in order):
-1. Continue hunt batches: agriculture top 50 → then other sectors' top hirers
-2. Fold hunt verdicts into sector parts (status column) before product phase
-3. Product phase: PDF layout, CV templates, guides, cold emails, disclaimer pages
+1. Hunt batches continue (top hirers only): agriculture ranks 19-50, then other sectors' top 10-15 — retry Job Bank cross-check each batch
+2. Spot-check JobBankCheck link format live once Job Bank access returns
+3. Product phase: PDF layout (self-check links become clickable), CV templates, guides, cold emails, disclaimer pages
 4. Business phase: Selar (or alternative) store, pricing page, marketing content plan
 
 Standing rule for every future agent: update BIBLE.md (sections 4, 7, 8) after your work. Never break the info-not-promises rule.

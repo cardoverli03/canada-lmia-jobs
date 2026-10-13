@@ -21,6 +21,8 @@ Rules (see BIBLE.md):
 import os
 import re
 import sys
+from urllib.parse import quote
+
 import pandas as pd
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -124,6 +126,22 @@ KW_PRIORITY = [
 ]
 
 MAX_PART_ROWS = 200
+
+
+def jobbank_check_url(employer):
+    """Ready-made Job Bank search link for an employer (quoted phrase, newest first).
+    NOTE: URL format is the standard jobbank.gc.ca search shape; spot-check live
+    when Job Bank access returns (sandbox IP was tarpitted 2026-10-13)."""
+    return (
+        "https://www.jobbank.gc.ca/jobsearch/jobsearch?searchstring="
+        + quote(f'"{employer}"', safe="")
+        + "&locationstring=&sort=D"
+    )
+
+
+def web_search_url(employer):
+    """Ready-made web search link (official site / careers page discovery)."""
+    return "https://www.google.com/search?q=" + quote(f'"{employer}" Canada careers', safe="")
 
 
 def parse_city(addr):
@@ -242,12 +260,18 @@ def export_sector(df, sector, jb):
         kind="mergesort",
     ).reset_index(drop=True)
 
+    sub["Entry"] = sub.index + 1
+    # Self-check links: the list verifies itself. Buyers (and we) click to see live
+    # postings / find the official site. No employer-by-employer browser slavery.
+    sub["JobBankCheck"] = sub["Employer"].apply(jobbank_check_url)
+    sub["WebSearch"] = sub["Employer"].apply(web_search_url)
+
     cols = [
         "Entry", "Employer", "JobTitle", "NOC", "TEER", "SkillLevel",
         "City", "ProvinceCode", "Postal", "Program Stream",
         "Approved LMIAs", "Approved Positions", "Address",
+        "JobBankCheck", "WebSearch",
     ]
-    sub["Entry"] = sub.index + 1
 
     n_parts = 0
     for start in range(0, len(sub), MAX_PART_ROWS):
@@ -292,8 +316,27 @@ def export_sector(df, sector, jb):
     for e, c in repeat.items():
         lines.append(f"- {e}: {c}")
     lines.append("")
-    lines.append("Status column (ACTIVE / WATCH) is added during the verification phase.")
-    with open(os.path.join(out_dir, "README.md"), "w", encoding="utf-8") as f:
+    lines.append("## Check it yourself (built into every part file)")
+    lines.append("")
+    lines.append(
+        "Every row carries two ready-made links: JobBankCheck (opens Job Bank "
+        "pre-filled with a quoted search for that employer, newest first) and "
+        "WebSearch (finds the employer's official site / careers page). Click, look, "
+        "decide. An approved LMIA is NOT a promise of a current opening - the links "
+        "are how you check the live situation in seconds."
+    )
+    lines.append("")
+
+    # Preserve any existing hunt/verification section (added by hunt batches, not the pipeline)
+    readme_path = os.path.join(out_dir, "README.md")
+    if os.path.exists(readme_path):
+        with open(readme_path, encoding="utf-8") as f:
+            old = f.read()
+        idx = old.find("## Verification (the hunt)")
+        if idx != -1:
+            lines.append(old[idx:].rstrip())
+            lines.append("")
+    with open(readme_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
     return len(sub), n_parts

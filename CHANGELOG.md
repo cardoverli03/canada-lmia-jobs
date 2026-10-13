@@ -25,3 +25,14 @@ All notable changes to this repo. Dates use YYYY-MM-DD (owner timezone: Africa/D
 
 - OWNER ORDER EXECUTED: raw Job Bank Sept 2026 CSV (46 MB) deleted from local disk, git history (HEAD commit amended, blob purged) and GitHub (force push). Provenance kept in data/raw/SOURCE.md; .gitignore now blocks raw Job Bank dumps permanently. Slim market-signal file (7.2 MB) kept.
 - VERIFICATION PHASE STARTED ("the hunt"): headless browser on jobbank.gc.ca, employer-name searches, top Approved-Positions agriculture hirers first. Results in data/hunt/ (date-stamped CSV logs, evidence URLs, verdicts ACTIVE / no-live-posting-today). Nothing invented, only what the browser shows.
+
+## 2026-10-13 (session 3, later)
+
+- OWNER DECISION: no slave work — lists verify themselves. Pipeline v3 adds two
+  self-check link columns to every row of every sector part file: JobBankCheck
+  (jobbank.gc.ca quoted employer search, newest first) + WebSearch (Google:
+  official site / careers discovery). All 11 sectors regenerated (counts unchanged).
+- Sector README regeneration now preserves existing "Verification (the hunt)"
+  sections (hunt output survives future pipeline runs).
+- Hunt batches = top hirers only, for ACTIVE trust badges. Scope rule added to
+  docs/HUNT-METHOD.md and BIBLE 3.3.

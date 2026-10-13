@@ -47,4 +47,6 @@
 - SERVICE D'ENTRETIEN TERONET INC: 15
 - Pelouses et Entretien Soucy Inc: 15
 
-Status column (ACTIVE / WATCH) is added during the verification phase.
+## Check it yourself (built into every part file)
+
+Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.

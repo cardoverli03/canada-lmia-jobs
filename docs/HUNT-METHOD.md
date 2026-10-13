@@ -14,6 +14,11 @@ value is honesty: an ACTIVE tag on our lists means WE verified it, on the stated
 4. **Never present WATCH as ACTIVE.** An open application form is ACTIVE (a live
    application channel). It is NOT a dated job opening — say which one it is.
 5. **Order of hunting: top Approved-Positions first**, sector by sector.
+6. **Scope (owner decision 2026-10-13): hunt batches cover TOP hirers only.**
+   We do not hand-verify the whole list — every row already carries self-check
+   links (`JobBankCheck` + `WebSearch`, built by the pipeline), so the list
+   verifies itself. Hunt output = trust badges + marketing proof, in hours per
+   sector, never weeks.
 
 ## Toolchain
 
