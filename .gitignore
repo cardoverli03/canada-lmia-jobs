@@ -11,3 +11,6 @@ __pycache__/
 token*.txt
 *_TOKEN*
 .env
+
+# Never commit raw Job Bank open-data dumps (46 MB+, no employer names, re-downloadable)
+data/raw/job-bank-*

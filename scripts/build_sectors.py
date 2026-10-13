@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """
-Cardo Careers - sector filtering pipeline
-=========================================
-Input : data/raw/tfwp_2026q1_pos_en.xlsx  (ESDC TFWP Positive LMIA Employers List, EN)
-Output: data/processed/tfwp_2026q1_clean.csv            (full cleaned dataset)
-        sectors/agriculture/agriculture-partNN.csv      (max 200 rows per part)
-        sectors/agriculture/README.md                   (live stats for this sector)
+Cardo Careers - sector filtering pipeline v2
+============================================
+Input : data/raw/tfwp_2026q1_pos_en.xlsx      (ESDC TFWP Positive LMIA Employers List, EN)
+        data/raw/ircc-noc2021-teer.csv        (IRCC official NOC 2021 -> TEER table, 516 codes)
+        data/raw/job-bank-open-data-all-job-postings-en-sept2026.csv  (Job Bank Sept 2026, UTF-16 TSV)
+Output: data/processed/tfwp_2026q1_clean.csv  (full cleaned dataset, sector + TEER + SkillLevel tagged)
+        data/processed/job-bank-sept2026-slim.csv
+        data/processed/unassigned_review.csv  (leftovers to inspect)
+        sectors/<name>/<name>-partNN.csv      (max 200 rows per part)
+        sectors/<name>/README.md              (live stats: provinces, jobs, hirers, market signal)
 
 Rules (see BIBLE.md):
-  - English only.
-  - One row = one approved LMIA entry (employer + occupation + location).
-  - Max 200 entries per file part. Parts sorted Province -> positions desc -> employer.
-  - Sector AGRICULTURE = Program Stream "Primary Agriculture" OR NOC in AG_NOC.
-    NOC 94141 (industrial butchers/poultry) -> future FOOD PROCESSING sector.
-    NOC 85102 (aquaculture/marine harvest)  -> future FISH & SEAFOOD sector.
+  - English only. One row = one approved LMIA entry (employer + occupation + location).
+  - Max 200 entries per part. Parts sorted Province -> positions desc -> employer.
+  - SkillLevel: TEER 0-3 = SKILLED, TEER 4-5 = UNSKILLED (source: IRCC official table).
+  - Sector = NOC list match first, keyword fallback second. Leftovers stay unassigned.
 """
 
 import os
@@ -22,8 +24,12 @@ import sys
 import pandas as pd
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RAW_FILE = os.path.join(REPO, "data", "raw", "tfwp_2026q1_pos_en.xlsx")
+RAW_LMIA = os.path.join(REPO, "data", "raw", "tfwp_2026q1_pos_en.xlsx")
+RAW_TEER = os.path.join(REPO, "data", "raw", "ircc-noc2021-teer.csv")
+RAW_JB = os.path.join(REPO, "data", "raw", "job-bank-open-data-all-job-postings-en-sept2026.csv")
+JB_SLIM_OUT = os.path.join(REPO, "data", "processed", "job-bank-sept2026-slim.csv")
 QUARTER = "2026-Q1"
+JB_MONTH = "September 2026"
 
 PROVINCE_MAP = {
     "Alberta": "AB",
@@ -43,8 +49,79 @@ PROVINCE_MAP = {
 }
 
 AG_NOC = {"80020", "82030", "84120", "85100", "85101", "85103", "21112"}
-FOOD_PROCESSING_NOC = {"94141"}
-FISH_SEAFOOD_NOC = {"85102"}
+
+# Sector definitions: NOC list match first, then keyword fallback (on lowercase JobTitle)
+SECTOR_DEFS = {
+    "agriculture": {
+        "noc": AG_NOC,
+        "kw": [r"farm", r"harvest", r"livestock", r"nursery", r"greenhouse", r"agricult"],
+        "stream": "Primary Agriculture",
+    },
+    "fish-seafood": {
+        "noc": {"85102", "94142"},
+        "kw": [r"fish", r"seafood", r"aquaculture"],
+    },
+    "food-processing": {
+        "noc": {"94141", "95106", "92012"},
+        "kw": [r"food and beverage processing", r"food processing", r"meat plant", r"poultry plant", r"food plant"],
+    },
+    "healthcare-nursing": {
+        "noc": {"31100","31101","31102","31110","31111","31112","31200","31201","31202","31203",
+                "31300","31301","31302","32101","32102","32103","32104","32110","32111","32112",
+                "32120","32121","32200","32201","32202","33100","33101","33102","33103","33109"},
+        "kw": [r"nurse", r"physician", r"doctor", r"dentist", r"dental", r"pharmac", r"physiother",
+               r"medical", r"paramedic", r"health", r"therapist", r"care aide", r"patient", r"midwife"],
+    },
+    "construction": {
+        "noc": {"70010","72014","72106","72310","72400","72401","73100","73102","73110","73112",
+                "73200","73400","75110"},
+        "kw": [r"construction", r"carpenter", r"roofer", r"drywall", r"plasterer", r"concrete",
+               r"bricklayer", r"tilesetter", r"glazier", r"ironworker", r"insulator", r"crane oper"],
+    },
+    "transport-trucking": {
+        "noc": {"73300","73301","72024","75101","72410","72411"},
+        "kw": [r"truck driver", r"bus driver", r"transit driver", r"courier", r"delivery driver",
+               r"material handler", r"shipping", r"forklift", r"dispatcher", r"chauffeur", r"taxi"],
+    },
+    "hospitality-food-service": {
+        "noc": {"60030","62020","62200","63200","63201","63202","65201","64300","64302","64314"},
+        "kw": [r"cook", r"chef", r"kitchen", r"bartender", r"barista", r"baker", r"food counter",
+               r"food service", r"food and beverage", r"dishwash", r"restaurant", r"hotel front desk"],
+    },
+    "cleaning-landscaping": {
+        "noc": {"65310","62024","85121"},
+        "kw": [r"cleaner", r"cleaning", r"janitor", r"housekeep", r"landscap", r"grounds maintenance", r"gardener"],
+    },
+    "retail-sales": {
+        "noc": {"60020","62010","62100"},
+        "kw": [r"retail", r"sales associate", r"salesperson", r"cashier", r"store clerk", r"merchandis"],
+    },
+    "tech-it": {
+        "noc": {"20012","21211","21221","21222","21223","21231","21232","21234","22221"},
+        "kw": [r"software", r"developer", r"programmer", r"data scien", r"database",
+               r"information system", r"cyber", r"web developer", r"systems analyst", r"devops",
+               r"user support"],
+    },
+    "office-admin": {
+        "noc": {"13100","13110","12200","12013","14100","14111","12101"},
+        "kw": [r"administrative", r"receptionist", r"bookkeep", r"accounting technician",
+               r"data entry", r"office clerk", r"secretary", r"records management"],
+    },
+}
+
+# Keyword fallback priority (fish/food before general, cleaning last-ish)
+KW_PRIORITY = [
+    "fish-seafood",
+    "food-processing",
+    "healthcare-nursing",
+    "construction",
+    "transport-trucking",
+    "hospitality-food-service",
+    "cleaning-landscaping",
+    "retail-sales",
+    "tech-it",
+    "office-admin",
+]
 
 MAX_PART_ROWS = 200
 
@@ -67,8 +144,13 @@ def parse_postal(addr):
     return m.group(1) if m else ""
 
 
+def load_teer():
+    t = pd.read_csv(RAW_TEER, dtype=str)
+    return dict(zip(t["NOC2021"], t["TEER"].astype(str).str.strip()))
+
+
 def load_clean():
-    df = pd.read_excel(RAW_FILE, skiprows=1)
+    df = pd.read_excel(RAW_LMIA, skiprows=1)
     df.columns = [str(c).strip() for c in df.columns]
     # strip every string cell (source cells are space-padded to fixed width)
     for c in df.columns:
@@ -90,17 +172,67 @@ def load_clean():
 
 
 def tag_sectors(df):
-    ag = df["Program Stream"].eq("Primary Agriculture") | df["NOC"].isin(AG_NOC)
-    fp = df["NOC"].isin(FOOD_PROCESSING_NOC) & ~ag
-    fs = df["NOC"].isin(FISH_SEAFOOD_NOC) & ~ag
     df["Sector"] = ""
-    df.loc[ag, "Sector"] = "agriculture"
-    df.loc[fp, "Sector"] = "food-processing"
-    df.loc[fs, "Sector"] = "fish-seafood"
+    # 1) NOC list matches (including agriculture stream rule)
+    for sector, d in SECTOR_DEFS.items():
+        noc = df["NOC"].isin(d["noc"])
+        if d.get("stream"):
+            noc = noc | df["Program Stream"].eq(d["stream"])
+        df.loc[df["Sector"].eq("") & noc, "Sector"] = sector
+    # 2) keyword fallback on job title
+    title = df["JobTitle"].str.lower().fillna("")
+    for sector in KW_PRIORITY:
+        if sector == "agriculture":
+            continue  # agriculture already fully covered by stream+NOC
+        pats = SECTOR_DEFS[sector]["kw"]
+        mask = df["Sector"].eq("")
+        for p in pats:
+            mask = mask & ~title.str.contains(p, regex=True, na=False)
+        hit = df["Sector"].eq("") & title.str.contains("|".join(pats), regex=True, na=False)
+        df.loc[hit, "Sector"] = sector
+        _ = mask  # (priority handled by sequential assignment on empty Sector)
     return df
 
 
-def export_sector(df, sector):
+def add_teer_skilllevel(df, teer_map):
+    df["TEER"] = df["NOC"].map(teer_map).fillna("")
+    df["SkillLevel"] = ""
+    df.loc[df["TEER"].isin(["0", "1", "2", "3"]), "SkillLevel"] = "SKILLED"
+    df.loc[df["TEER"].isin(["4", "5"]), "SkillLevel"] = "UNSKILLED"
+    return df
+
+
+def load_jb_slim():
+    if os.path.exists(JB_SLIM_OUT):
+        return pd.read_csv(JB_SLIM_OUT, dtype=str)
+    cols = ["Job Title", "NOC21 Code", "NOC21 Code Name", "First Posting Date", "Vacancy Count",
+            "Province/Territory", "City", "Work Location Postal Code",
+            "Salary Minimum", "Salary Maximum", "Salary Per", "Employment Type", "Employment Term"]
+    jb = pd.read_csv(RAW_JB, sep="\t", encoding="utf-16", usecols=cols, dtype=str, low_memory=False)
+    jb.to_csv(JB_SLIM_OUT, index=False)
+    return jb
+
+
+def jb_market_signal(jb, sector):
+    d = SECTOR_DEFS[sector]
+    nocs = list(d["noc"])
+    sub = jb[jb["NOC21 Code"].isin(nocs)].copy()
+    n_postings = len(sub)
+    n_vac = pd.to_numeric(sub["Vacancy Count"], errors="coerce").fillna(0).sum()
+    wage = None
+    sal_min = pd.to_numeric(sub["Salary Minimum"], errors="coerce")
+    sal_max = pd.to_numeric(sub["Salary Maximum"], errors="coerce")
+    per = sub["Salary Per"].fillna("")
+    hourly = ((sal_min + sal_max) / 2).where(per.eq("Hour"))
+    annual = (((sal_min + sal_max) / 2) / 2080).where(per.eq("Year"))
+    rate = hourly.fillna(annual).dropna()
+    if len(rate) > 0:
+        wage = round(rate.median(), 2)
+    top_prov = sub["Province/Territory"].value_counts().head(3)
+    return n_postings, int(n_vac), wage, top_prov
+
+
+def export_sector(df, sector, jb):
     out_dir = os.path.join(REPO, "sectors", sector)
     os.makedirs(out_dir, exist_ok=True)
     sub = df[df["Sector"] == sector].copy()
@@ -108,21 +240,12 @@ def export_sector(df, sector):
         ["Province/Territory", "Approved Positions", "Employer"],
         ascending=[True, False, True],
         kind="mergesort",
-    )
-    sub = sub.reset_index(drop=True)
+    ).reset_index(drop=True)
 
     cols = [
-        "Entry",
-        "Employer",
-        "JobTitle",
-        "NOC",
-        "City",
-        "ProvinceCode",
-        "Postal",
-        "Program Stream",
-        "Approved LMIAs",
-        "Approved Positions",
-        "Address",
+        "Entry", "Employer", "JobTitle", "NOC", "TEER", "SkillLevel",
+        "City", "ProvinceCode", "Postal", "Program Stream",
+        "Approved LMIAs", "Approved Positions", "Address",
     ]
     sub["Entry"] = sub.index + 1
 
@@ -130,25 +253,27 @@ def export_sector(df, sector):
     for start in range(0, len(sub), MAX_PART_ROWS):
         chunk = sub.iloc[start : start + MAX_PART_ROWS]
         n_parts += 1
-        part_path = os.path.join(
-            out_dir, f"{sector}-part{n_parts:02d}.csv"
-        )
-        chunk[cols].to_csv(part_path, index=False)
+        chunk[cols].to_csv(os.path.join(out_dir, f"{sector}-part{n_parts:02d}.csv"), index=False)
 
-    # sector README with live stats
+    # README with live stats
     prov_counts = sub["ProvinceCode"].value_counts()
     top_jobs = sub["JobTitle"].value_counts().head(10)
     unique_emp = sub["Employer"].nunique()
+    skill = sub["SkillLevel"].value_counts()
     repeat = sub.groupby("Employer")["Approved Positions"].sum().sort_values(ascending=False).head(10)
 
     lines = []
     lines.append(f"# {sector.upper()} - Cardo Careers sector data")
     lines.append("")
     lines.append(f"- Source: ESDC TFWP Positive LMIA Employers List, {QUARTER} (English)")
-    lines.append(f"- Total entries: **{len(sub)}**")
-    lines.append(f"- Unique employers: **{unique_emp}**")
-    lines.append(f"- Parts: **{n_parts}** (max {MAX_PART_ROWS} entries each)")
-    lines.append(f"- Sector rule: Program Stream == 'Primary Agriculture' OR NOC in {sorted(AG_NOC)}")
+    lines.append(f"- Total entries: **{len(sub)}** | Unique employers: **{unique_emp}** | Parts: **{n_parts}** (max {MAX_PART_ROWS} each)")
+    if len(skill):
+        lines.append(f"- Skill split: " + ", ".join(f"{k} {v}" for k, v in skill.items()) + " (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)")
+    if sector in SECTOR_DEFS:
+        n_p, n_v, wage, top_prov = jb_market_signal(jb, sector)
+        lines.append(f"- Live market signal (Job Bank, {JB_MONTH}): {n_p} postings, {n_v} vacancies" + (f", median wage ~${wage}/hr equivalent" if wage else ""))
+        if len(top_prov):
+            lines.append("  - Postings by province: " + ", ".join(f"{p} {c}" for p, c in top_prov.items()))
     lines.append("")
     lines.append("## Entries by province")
     lines.append("")
@@ -162,7 +287,7 @@ def export_sector(df, sector):
     for j, c in top_jobs.items():
         lines.append(f"- {j}: {c}")
     lines.append("")
-    lines.append("## Top repeat hirers (total approved positions, all entries)")
+    lines.append("## Top repeat hirers (total approved positions)")
     lines.append("")
     for e, c in repeat.items():
         lines.append(f"- {e}: {c}")
@@ -175,20 +300,37 @@ def export_sector(df, sector):
 
 
 def main():
+    teer_map = load_teer()
+    print(f"[teer] {len(teer_map)} NOC codes loaded from IRCC table")
     df, deduped = load_clean()
-    df = tag_sectors(df)
     print(f"[load] rows kept: {len(df)} (dropped {deduped} exact duplicates + footer notes)")
+    df = tag_sectors(df)
+    df = add_teer_skilllevel(df, teer_map)
 
-    processed_path = os.path.join(REPO, "data", "processed", f"tfwp_{QUARTER.replace('-', '').lower()}_clean.csv")
+    processed_path = os.path.join(REPO, "data", "processed", "tfwp_2026q1_clean.csv")
     df.to_csv(processed_path, index=False)
-    print(f"[save] {os.path.relpath(processed_path, REPO)}")
+    print(f"[save] data/processed/tfwp_2026q1_clean.csv")
 
     print("\n=== sector counts ===")
     print(df["Sector"].replace("", "(unassigned)").value_counts().to_string())
 
-    for sector in ("agriculture",):
-        total, parts = export_sector(df, sector)
-        print(f"\n[{sector}] entries: {total} -> {parts} part files")
+    print("\n=== skill levels (all rows) ===")
+    print(df["SkillLevel"].replace("", "(no teer)").value_counts().to_string())
+
+    # leftovers for review
+    left = df[df["Sector"].eq("")]
+    left["Occupation"].value_counts().head(50).to_csv(
+        os.path.join(REPO, "data", "processed", "unassigned_review.csv")
+    )
+    print(f"\n[leftover review] {len(left)} rows -> data/processed/unassigned_review.csv")
+
+    jb = load_jb_slim()
+    print(f"[jobbank slim] {len(jb)} postings loaded")
+
+    print()
+    for sector in SECTOR_DEFS:
+        total, parts = export_sector(df, sector, jb)
+        print(f"[{sector}] entries: {total} -> {parts} part files")
 
     print("\nDone.")
 

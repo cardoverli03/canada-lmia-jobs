@@ -1,0 +1,47 @@
+# RETAIL-SALES - Cardo Careers sector data
+
+- Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
+- Total entries: **295** | Unique employers: **289** | Parts: **2** (max 200 each)
+- Skill split: SKILLED 278, UNSKILLED 17 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
+- Live market signal (Job Bank, September 2026): 1369 postings, 1536 vacancies, median wage ~$27.01/hr equivalent
+  - Postings by province: Ontario 388, British Columbia 294, Québec 239
+
+## Entries by province
+
+| Province | Entries |
+|----------|---------|
+| ON | 88 |
+| BC | 74 |
+| AB | 69 |
+| QC | 35 |
+| MB | 11 |
+| SK | 8 |
+| NB | 3 |
+| NS | 3 |
+| PE | 2 |
+| FOREIGN-HQ | 1 |
+| NT | 1 |
+
+## Top requested jobs
+
+- Retail and wholesale trade managers: 139
+- Retail sales supervisors: 103
+- Technical sales specialists - wholesale trade: 25
+- Cashiers: 13
+- Retail and wholesale buyers: 11
+- Retail salespersons and visual merchandisers: 4
+
+## Top repeat hirers (total approved positions)
+
+- DARS Brothers Ltd: 6
+- H.A.L.T. HOLDINGS LTD: 6
+- JPT Gamble Enterprises Ltd.: 5
+- Lovely Imports and Retails Ltd: 5
+- PRAKM Ventures Ltd.: 5
+- 2857-4077 Québec Inc.: 5
+- Two Bay Enterprizes Limited: 5
+- AMPVIC Development  Inc.: 4
+- Spokes Bicycle Rentals & Espresso Bar Inc: 2
+- 7027622 Manitoba Inc: 2
+
+Status column (ACTIVE / WATCH) is added during the verification phase.

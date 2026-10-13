@@ -38,7 +38,7 @@ into clean, organized sector packages, and sell them as digital products.
 - Official page: https://open.canada.ca/data/dataset/90fed587-1364-4f33-a9ee-208181dc0b97
 - Publisher: Employment and Social Development Canada (ESDC)
 - Update cadence: quarterly (per quarter = one XLSX file, English + French versions)
-- **Latest English file as of 2026-10-13: `tfwp_2026q1_pos_en.xlsx` (2026 Q1, Jan–Mar), resource id `4ee7a4e0-ffc3-47af-94e7-30929d1eeb67`, published/updated 2026-07-21. Stored at `data/raw/`.**
+- **Latest English file as of 2026-10-13: `tfwp_2026q1_pos_en.xlsx` (2026 Q1, Jan–Mar), resource id `4ee7a4e0-ffc3-47af-94e7-30929d1eeb67`, published/updated 2026-07-21. Stored at `data/raw/`. RE-CHECKED 2026-10-13: no newer quarter published yet.**
 - Verified contents of 2026-Q1 EN file: **8,790 clean data rows** after removing header + footer notes.
 - Columns: Province/Territory | Program Stream | Employer | Address | Occupation (NOC 2021 code-title) | Incorporate Status | Approved LMIAs | Approved Positions
 - Program streams present: High Wage (4092), Primary Agriculture (2265), Low Wage (2081), Global Talent Stream (316), Permanent Resident Only (36)
@@ -50,18 +50,19 @@ Official caveats (from the dataset notes — repeat these to customers when rele
 3. Approved LMIA positions ≠ workers who actually came. It tracks positions approved, not permits issued.
 4. The two open.canada.ca links the project started from: one is the Job Bank postings dataset, the other is this LMIA list. English only for our products; French versions ignored.
 
-### 2.2 Secondary source — Job Bank job postings (for live-verification phase)
+### 2.2 Secondary source — Job Bank job postings (market signal, NOT employer matcher)
 
 - Official page: https://open.canada.ca/data/dataset/ea639e28-c0fc-48bf-b5dd-b8899bd43072
-- Monthly CSV: all postings advertised on Job Bank (EN + FR). Latest at check: `job-bank-open-data-all-job-postings-en-sept2026.csv` (resource id `03523cbf-a005-40ee-81ad-aca5bb74cf03`, updated 2026-10-02).
-- **WARNING: direct file downloads and the CKAN datastore API for this dataset are blocked by a WAF ("Request Rejected") for non-browser requests.** Workaround options for the verification phase: headless browser (agent-browser), or different request fingerprint. Do not waste time with plain curl.
-- Note: the CKAN datastore API only exposes an older snapshot (Aug 2025 era) — do not trust it for freshness.
+- Monthly CSV: all postings advertised on Job Bank (EN + FR). Latest at check: `job-bank-open-data-all-job-postings-en-sept2026.csv` (resource id `03523cbf-a005-40ee-81ad-aca5bb74cf03`, updated 2026-10-02). **Raw 46 MB file REMOVED from repo 2026-10-13 (owner order) — provenance in `data/raw/SOURCE.md`, re-downloadable from the official link; a `.gitignore` rule blocks raw Job Bank dumps from ever being committed again. The slim derived file `data/processed/job-bank-sept2026-slim.csv` (7.2 MB) is kept.**
+- **WAF rule learned 2026-10-13: plain curl gets "Request Rejected". A full browser header fingerprint (Chrome UA + Accept + Accept-Language + Referer) PASSES for file downloads. The CKAN datastore API remains blocked regardless.**
+- **CRITICAL FINDING: the Job Bank open-data CSV contains NO employer name column** (52,368 postings verified for Sept 2026 — NOC codes, dates, vacancies, province, city, wages, but no employer). It CANNOT be used to match which employer is hiring.
+- Therefore: **employer verification = browser hunt on the Job Bank website (jobbank.gc.ca search by employer name) + the employer's own careers page.** The CSV is used for market signal stats per sector (posting counts, vacancies, median wages, province spread) — honest, date-stamped numbers we put in sector READMEs and products.
 
-### 2.3 Why Job Bank matters (business logic)
+### 2.3 NOC → TEER mapping (official)
 
-- Employers applying for a TFWP LMIA must advertise the job on Job Bank (plus 2 other Canadian sources) around their application window.
-- So: employer on the LMIA list + live Job Bank posting = strongest "hiring now" signal we can sell.
-- Any employer can post on Job Bank (no LMIA needed to post) — a posting alone does NOT prove sponsorship. Never claim it does.
+- `data/raw/ircc-noc2021-teer.csv` — extracted 2026-10-13 from the official IRCC page "Find your NOC" (canada.ca). 516 NOC 2021 unit groups with TEER 0-5.
+- Extraction method: canada.ca tarpits curl (Akamai). Headless browser (agent-browser) loads the page fine; the full table is embedded in the served HTML as `<tr><td>TEER</td><td>NOC</td><td>Title</td></tr>`.
+- SkillLevel rule: TEER 0-3 = SKILLED, TEER 4-5 = UNSKILLED. This matches how work-permit/PR pathways frame skilled work.
 
 ---
 
@@ -81,7 +82,9 @@ Official caveats (from the dataset notes — repeat these to customers when rele
 
 ### 3.2 Columns of a processed entry (current CSV form, PDF layout later)
 
-`Entry, Employer, JobTitle, NOC, City, ProvinceCode, Postal, Program Stream, Approved LMIAs, Approved Positions, Address`
+`Entry, Employer, JobTitle, NOC, TEER, SkillLevel, City, ProvinceCode, Postal, Program Stream, Approved LMIAs, Approved Positions, Address`
+
+- `SkillLevel`: SKILLED (TEER 0-3) / UNSKILLED (TEER 4-5), from the official IRCC TEER table. This column powers the future SKILLED and UNSKILLED product packs — no separate folder until that product phase.
 
 ### 3.3 Cardo Activity Score (verification phase — not started yet)
 
@@ -96,32 +99,36 @@ Rules: verification is done in batches, TOP hirers first. We verify what we can 
 
 ---
 
-## 4. SECTOR DEFINITIONS
+## 4. SECTOR DEFINITIONS (all BUILT 2026-10-13, source 2026-Q1)
 
-NOC 2021 (5-digit codes, from the Occupation column "NNNNN-Title").
+NOC 2021 5-digit codes from the Occupation column "NNNNN-Title". Assignment = NOC list match first, keyword fallback second (keyword priority order in `scripts/build_sectors.py`). Sector counts below are from 2026-Q1:
 
-### agriculture (BUILT — 2026-10-13)
-- Rule: Program Stream == `Primary Agriculture` OR NOC in {80020, 82030, 84120, 85100, 85101, 85103, 21112}
-- Result on 2026-Q1: **2,270 entries, 2,141 unique employers, 12 parts**
-- Province spread: QC 1166, ON 500, BC 289, AB 146, SK 56, NS 44, MB 32, NB 19, PE 15, NL 3
-- Top jobs: Harvesting labourers (1093), Livestock labourers (736), Agricultural service contractors and farm supervisors (164), Specialized livestock workers and farm machinery operators (131), Nursery and greenhouse labourers (129)
+| Sector | Entries | Parts | Top jobs |
+|--------|---------|-------|----------|
+| agriculture | 2,270 | 12 | Harvesting labourers 1093, Livestock labourers 736 |
+| hospitality-food-service | 1,202 | 7 | Cooks 353, Restaurant managers 295, Food service supervisors 235 |
+| construction | 1,038 | 6 | Carpenters 162, Welders 156, Trades helpers 99 |
+| tech-it | 546 | 3 | Software developers 119, Software engineers 93 |
+| transport-trucking | 503 | 3 | Transport truck drivers 207 |
+| healthcare-nursing | 364 | 2 | Nurse aides 131, GPs 59, RNs 26 |
+| office-admin | 329 | 2 | Admin officers 83, Accounting techs 67 |
+| retail-sales | 295 | 2 | Retail managers 139, Sales supervisors 103 |
+| cleaning-landscaping | 248 | 2 | Landscaping labourers 87, Light duty cleaners 73 |
+| food-processing | 124 | 1 | Industrial butchers, Processing labourers |
+| fish-seafood | 64 | 1 | Fish/seafood plant workers, Aquaculture labourers |
 
-### food-processing (pre-tagged, sector not built)
-- NOC 94141 (Industrial butchers and meat cutters, poultry preparers) found in other streams.
-
-### fish-seafood (pre-tagged, sector not built)
-- NOC 85102 (Aquaculture and marine harvest labourers).
-
-### Planned sectors (rules to be defined the same way: stream OR NOC lists)
-- construction, transport-trucking, healthcare-nursing, hospitality-food-service, manufacturing, retail-sales, cleaning-maintenance, and a SKILLED / UNSKILLED line (TEER-based).
-- Rule of thumb for new sectors: inspect NOC value counts in `data/processed/tfwp_2026q1_clean.csv`, define NOC lists explicitly, never keyword-only.
+- Coverage: 6,983 of 8,790 rows (79.4%). **1,807 rows unassigned** (long tail: machinists, marketing, ECE, engineering, design...) — see `data/processed/unassigned_review.csv`. Future sector candidates: manufacturing-metal, personal-services, education.
+- Skill split (all rows): SKILLED 5,847 / UNSKILLED 2,943 (IRCC TEER table).
+- Agriculture rule unchanged: Program Stream == `Primary Agriculture` OR NOC in {80020, 82030, 84120, 85100, 85101, 85103, 21112}.
+- Every sector README includes a "Live market signal" line from the Job Bank Sept 2026 CSV (postings, vacancies, median wage, top provinces) — honest date-stamped market data, not promises.
+- SKILLED / UNSKILLED product packs: LAST phase, built by filtering the SkillLevel column. Higher price, never mixed with sector packs.
 
 ---
 
 ## 5. REPO STRUCTURE & PIPELINE
 
 ```
-cardo-careers/
+canada-lmia-jobs/   (GitHub: cardoverli03/canada-lmia-jobs)
   BIBLE.md              <- this file. Always current.
   README.md             <- short overview
   CHANGELOG.md          <- dated log of what was done
@@ -166,22 +173,28 @@ Data quirks already handled (do not re-discover): title row + footer note rows i
 - **2026-10-13** — Cardo Activity Score designed (ACTIVE / WATCH / REPEAT / OLD). Verification phase NOT started (needs Job Bank data via headless browser — WAF blocks plain requests).
 - **2026-10-13** — Job Bank file downloads + datastore API confirmed WAF-blocked for non-browser clients. Use headless browser in verification phase.
 - **2026-10-13** — Business packaging (guides, CV templates, cold emails, store setup, region targeting) is a LATER phase. Current phase: filter sectors + keep everything on GitHub.
+- **2026-10-13** — GitHub repo created: `cardoverli03/canada-lmia-jobs` (first name `cardo-careers` was taken on GitHub). Local repo renamed to match.
+- **2026-10-13** — Job Bank Sept 2026 CSV downloaded by beating the WAF with a browser header fingerprint. Finding: NO employer names in the open data → employer verification must be done by browser hunting jobbank.gc.ca + employer sites. CSV used for market-signal stats only.
+- **2026-10-13** — Official NOC→TEER mapping extracted from IRCC's canada.ca page (516 codes, via headless browser — canada.ca tarpits curl). SkillLevel = SKILLED (TEER 0-3) / UNSKILLED (TEER 4-5) added to all rows. Brother's skilled/unskilled idea implemented at data level; product packs stay LAST phase.
+- **2026-10-13** — Pipeline v2 built. All 11 sectors generated: agriculture 2,270; hospitality-food-service 1,202; construction 1,038; tech-it 546; transport-trucking 503; healthcare-nursing 364; office-admin 329; retail-sales 295; cleaning-landscaping 248; food-processing 124; fish-seafood 64. 1,807 long-tail rows unassigned for future sectors.
+- **2026-10-13** — Raw Job Bank Sept 2026 CSV (46 MB) deleted from local repo, git history (commit amended) and GitHub (force push) on the owner's order. Slim market-signal derivative kept. Rule added: raw Job Bank dumps are never committed again.
+- **2026-10-13** — VERIFICATION PHASE STARTED (the Hunt). Method: headless browser (agent-browser, real Chromium) on jobbank.gc.ca, employer-name search, top Approved-Positions hirers first. Hunt logs stored in `data/hunt/` (one CSV per batch, date-stamped, verdict per employer: ACTIVE with posting evidence + URL, or no-live-posting-today). Only what the browser actually shows gets recorded. Never present WATCH as ACTIVE.
 
 ---
 
 ## 8. CURRENT STATUS / NEXT STEPS
 
 Done:
-- Repo created, Bible written
+- Repo created + pushed to GitHub (`cardoverli03/canada-lmia-jobs`), Bible written
 - 2026-Q1 EN raw file stored + provenance documented
-- Pipeline built (`scripts/build_sectors.py`)
-- AGRICULTURE sector built: 2,270 entries → 12 parts + stats README
+- Pipeline built (`scripts/build_sectors.py`) — all 11 sectors generated
+- Raw 46 MB Job Bank CSV deleted from local + history + GitHub (owner order)
+- HUNT batch 01 (agriculture, top hirers) — see `data/hunt/`
 
 Next (in order):
-1. Push repo to GitHub (waiting for owner's GitHub token / repo creation)
-2. Define + build next sectors from the 6,505 unassigned rows (construction, transport, healthcare...)
-3. Verification phase: Job Bank + employer sites via headless browser → Activity Score (top hirers first)
-4. Product phase: PDF layout, CV templates, guides, cold emails, disclaimer pages
-5. Business phase: Selar (or alternative) store, pricing page, marketing content plan
+1. Continue hunt batches: agriculture top 50 → then other sectors' top hirers
+2. Fold hunt verdicts into sector parts (status column) before product phase
+3. Product phase: PDF layout, CV templates, guides, cold emails, disclaimer pages
+4. Business phase: Selar (or alternative) store, pricing page, marketing content plan
 
 Standing rule for every future agent: update BIBLE.md (sections 4, 7, 8) after your work. Never break the info-not-promises rule.
