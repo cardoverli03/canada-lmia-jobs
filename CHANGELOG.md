@@ -2,6 +2,15 @@
 
 All notable changes to this repo. Dates use YYYY-MM-DD (owner timezone: Africa/Dar_es_Salaam).
 
+## 2026-10-14 (session 5 — verification & audit)
+
+- DATA AUDIT built and run: `scripts/audit_data.py` (permanent checker) — **14/14 checks PASSED**. Verified: 0 duplicate source rows, 0 mixed SKILLED/UNSKILLED files, TEER↔level agreement on all rows, gapless Entry numbering, JobBankCheck+WebSearch on all 8,164 rows, zero invented rows, zero cross-sector duplicates, exact accounting (8,164 + 626 longtail = 8,790).
+- The 31 same-key source rows inspected one by one: all are separate LMIA decisions under different Program Streams (e.g. CGI: 1 position GTS + 4 High Wage) — kept, each is a distinct approval.
+- Two hunt-log rows repaired (column-shift from pasted URLs): Amazon Development Centre (batch12 → ACTIVE, the 43rd badge) and Trican Transport (batch04 → NO-SITE-FOUND). Final hunt tally: **43 ACTIVE / 191 checked across 16 batches**.
+- Stat correction: earlier SKILLED/UNSKILLED totals (5,847/2,943) wrongly included the 626 un-allocated longtail rows. File-truth: **5,338 SKILLED + 2,826 UNSKILLED = 8,164**.
+- LMIA 6-month validity answered honestly in `docs/DATA-INTEGRITY.md` §4: every Q1 2026 approval letter expired by ~Sep 30, 2026; the list's value = proven repeat-TFWP employers (664 multi-filers, 26% of positions); live truth = 43 dated ACTIVE badges + per-row JobBankCheck links (postings show their own apply-by deadlines). Product copy rule set: never "open jobs", always "approved last quarter + live check".
+- New doc: `docs/DATA-INTEGRITY.md` (audit scoreboard, real numbers, IS/IS-NOT table, validity math, hunt tally, bug log).
+
 ## 2026-10-14 (session 3)
 
 - Sandbox was wiped between sessions; full state recovered via anonymous clone from GitHub (repo public, 46MB purge verified live).

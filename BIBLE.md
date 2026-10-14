@@ -197,6 +197,9 @@ Data quirks already handled (do not re-discover): title row + footer note rows i
 - **2026-10-14** — Sandbox was wiped between sessions; full state recovered by anonymous clone from GitHub (repo is public, 46MB-purge verified). Lesson reaffirmed: GitHub is the single source of truth.
 - **2026-10-13** — FILTERING COMPLETED to 92.9%: 5 new sectors cut from the 1,807-row long tail (manufacturing-industrial 527, marketing-media-creative 229, beauty-personal-services 92, education-teaching 86, repair-maintenance 79) + expansions (construction +95 with plumbers/electricians/steamfitters/HVAC/floor-covering; healthcare +12 caregivers; tech-it +24 network technicians; hospitality +37 accommodation/hotel). All NOC codes sourced from official data rows. 16 sectors total, 8,164/8,790 rows covered. 626-row thin tail left unassigned on purpose. Bug caught and fixed in review: regex `spa` matched "Aero**spa**ce" — word boundaries added.
 
+- **2026-10-14** — DATA INTEGRITY AUDIT (owner demanded proof the filtering is clean). New permanent checker `scripts/audit_data.py`: 14/14 checks PASSED — 0 duplicate rows, 0 mixed SKILLED/UNSKILLED files, TEER↔level agreement on all rows, Entry numbering gapless, JobBankCheck+WebSearch on all 8,164 rows, zero invented rows, zero cross-sector duplicates, accounting exact (8,164 + 626 = 8,790). The 31 same-key source rows verified as separate LMIA decisions under different Program Streams (kept). Two hunt-log rows repaired (Amazon b12 / Trican b04 column-shift) — true tally 43 ACTIVE / 191 checked. Stat correction: earlier log said 5,847 SKILLED + 2,943 UNSKILLED, but that included the 626 un-allocated longtail rows; file-truth is 5,338 + 2,826 = 8,164. Full report: docs/DATA-INTEGRITY.md.
+- **2026-10-14** — LMIA 6-MONTH TRUTH (owner asked if Jan–Mar approvals are expired): a positive LMIA is valid 6 months from issuance, so EVERY approval letter on the 2026-Q1 list expired by ~Sep 30, 2026 — 100%, by calendar. The list is a map of PROVEN TFWP employers (664 filed 2+ approvals in one quarter; repeat filers hold 26% of positions), NOT a vacancy list and NOT a list of currently-valid letters. Live truth layers, both dated after expiry: (a) hunt 43 ACTIVE badges checked Oct 13–14, 2026; (b) JobBankCheck link on every row — live Job Bank postings show per-posting apply-by deadlines. Product copy rule: never "open jobs", always "approved last quarter + 5-second live check". ESDC publishes no expiry/deadline columns.
+
 ---
 
 ## 8. CURRENT STATUS / NEXT STEPS
@@ -208,15 +211,14 @@ Done:
 - Raw 46 MB Job Bank CSV deleted from local + history + GitHub (owner order)
 - Pipeline v3 done: self-check links (JobBankCheck + WebSearch) on every row of all sectors.
 - FILTERING STAGE COMPLETE: 16 sectors, 8,164/8,790 rows (92.9%), 626-row thin tail documented.
-- HUNT batch 01 done (agriculture top 18 by Approved Positions): 3 ACTIVE (Fraisebec,
-  Monette Farms, Les Jardins Vegibec), 3 site-live-no-public-channel, 9 no-site-found,
-  2 bot-walled, 1 unreachable. Evidence: `data/hunt/2026-10-13_agriculture_batch01.csv`.
+- HUNT complete: 16 batches, 191 employers checked, 43 ACTIVE with evidence URLs.
+- DATA AUDIT passed 14/14 (`scripts/audit_data.py`); report in `docs/DATA-INTEGRITY.md`.
 - Hunt SOP written: `docs/HUNT-METHOD.md` (verdict vocabulary, traps, toolchain).
 
 Next (in order):
-1. Hunt batches (top hirers only): manufacturing-industrial, construction, transport — retry Job Bank cross-check each batch
-2. Spot-check JobBankCheck link format live once Job Bank access returns
-3. Product phase (only on owner's GO): PDF layout (self-check links become clickable), CV templates, guides, cold emails, disclaimer pages
+1. Product phase — SEPARATE CHAT, owner's call (PDF layout, CV templates, guides, disclaimer pages; copy rule: info-not-promises + LMIA-validity framing from docs/DATA-INTEGRITY.md §4)
+2. Optional data upkeep: retry Job Bank tarpit + bot-walled giants from another network; refresh hunt stamps before any product launch
+3. Spot-check JobBankCheck link format live once Job Bank access returns
 4. Business phase: Selar (or alternative) store, pricing page, marketing content plan
 
 Standing rule for every future agent: update BIBLE.md (sections 4, 7, 8) after your work. Never break the info-not-promises rule.
