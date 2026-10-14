@@ -53,3 +53,17 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 15 hirers by approved positions (see `data/hunt/2026-10-14_hospitality-food-service_batch02.csv` for full evidence):
+
+- **ACTIVE — live hiring channels:**
+  - North American Midway Entertainment (30 pos) — online employment application form: https://www.namidway.com/careers
+  - ClubLink Corporation (26 pos) — live job board with openings (Food & Beverage Manager roles posted): https://clublink.ca/about/employment/opportunities/
+  - Empress Hotel Operations Corp / Fairmont Empress Victoria (11 pos) — dated posting "Journey Person Cook (Full-time)" with Apply link: https://careers.accor.com/global/en/jobs?q=Empress_Victoria
+- **NO-PUBLIC-CHANNEL:** The South Shore Fish Shack (10 pos) — official site live, identity confirmed, no public hiring page
+- **BOT-WALLED:** Totem Lodge (34, Cloudflare), Cargill Ltd. + Cargill Meat Solutions Guelph (42 combined, Akamai) — sites exist, retry from another network
+- **WRONG-SITE-LOOKALIKE (excluded as evidence):** rjconcessions.com is a Sarasota FL company, not the Winnipeg MB employer
+- **NO-SITE-FOUND:** The Butcher Shoppe (two US same-name sites excluded), numbered/opaque employers (7043821 Canada, 0859319 BC Ltd, M.G.B. Ventures, Saujani, S&T Allard, Ford Concessions)
+- Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds

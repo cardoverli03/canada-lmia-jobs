@@ -52,3 +52,19 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 15 hirers by approved positions (see `data/hunt/2026-10-14_construction_batch03.csv` for full evidence):
+
+- **ACTIVE — live hiring channels:**
+  - Contour Earthmoving (22 pos) — application form listing 7 open operator roles (Excavator/Dozer/Rock Truck/Packer/Heavy Haul/Pilot Truck/Fuel-Lube): https://www.contourearthmoving.com/careers.html
+  - Rulam Contracting (21 pos) — live careers form; page privacy notice states Acheson AB address = exact LMIA match: https://rulam.ca/Careers
+  - Rafat General Contractor (20 pos) — "currently accepting resumes for all positions": https://rafat.ca/careers/
+  - Classic Landscapes (14 pos) — live resume form, Edmonton identity confirmed: https://classiclandscapes.com/about-us
+- **UNREACHABLE:** EVR Operations (25 pos) — evr.ca live (Elk Valley Resources, Glencore; 25x Heavy-duty equipment mechanics = occupation match) but careers portal careers.glencore.com unresolvable from our network
+- **BOT-WALLED:** Pioneer Construction (25), United Roofing (17), Lanco Aménagement (16), Bosa Construction (12) — sites exist behind Cloudflare/client challenges
+- **WRONG-SITE-LOOKALIKE (excluded as evidence):** carmacks.ca = Village of Carmacks YUKON (municipality); cemrock.com = Cemrock Landscapes TUCSON AZ
+- **NO-PUBLIC-CHANNEL:** Dynamic Concrete Pumping (20 pos) — site live, no public hiring page
+- **NO-SITE-FOUND:** PR Pomeroy (14), Optimal Structural Formwork (13), Brunco Insulation (12, domain for sale)
+- Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds
