@@ -60,3 +60,19 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 15 hirers by approved positions (see `data/hunt/2026-10-14_transport-trucking_batch04.csv` for full evidence):
+
+- **ACTIVE — live hiring channels:**
+  - Aliments Nortera (20 pos) — live board "65 positions" incl. LOGISTICS COORDINATOR Brossard QC (exact city match): https://jobs.norterafoods.com/en/careers/
+  - Sysco Canada (11 pos) — careers.sysco.ca, 94 live results incl. AZ Delivery Driver Barrie + Transportation Supervisor: https://careers.sysco.ca/en/search-jobs
+  - Gulzar Transport (10 pos) — live hiring page "Apply For Administrative Officer": https://gulzartransport.com/hiring/
+  - Highlight Motor Freight (10 pos) — dedicated driver recruitment site, live application form, address "391 Creditstone Rd, Concord ON" = exact LMIA match: https://highlightmotorfreight.ca/en/driver-application-form.php
+- **UNREACHABLE:** Lodex Transport (32 pos) — lodex.ca server-broken (500); lodex.com = Dubai consulting lookalike, excluded
+- **BOT-WALLED:** AYR Motor Express (10 pos) — ayrmotor.com bot interstitial; ayr.com = fashion brand lookalike, excluded
+- **WRONG-SITE-LOOKALIKE (excluded as evidence):** lodex.com (Dubai), ayr.com (clothing)
+- **NO-PUBLIC-CHANNEL:** Calmar Transport (16 pos) — site live, no hiring page
+- **NO-SITE-FOUND:** numbered companies (2264236 ON, 9591699 Canada), Everest Transportation + HNM Logistics + JS&MK (domains parked for sale), Hummer Freightways, Trican Transport, Gpex (Coming Soon placeholder)
+- Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds
