@@ -53,3 +53,19 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 12 hirers by approved positions (see `data/hunt/2026-10-14_food-processing_batch06.csv` for full evidence):
+
+**ACTIVE — live hiring channels:**
+- **Nortera Foods Inc.** (202 pos) — https://jobs.norterafoods.com/en/careers/
+- **Aliments Nortera Inc.** (108 pos) — https://jobs.norterafoods.com/en/careers/
+- **Fruit d'Or** (50 pos) — https://fruitdor.ca/en/careers
+- **Emballage Avico Inc.** (17 pos) — https://avico.ca
+
+**BOT-WALLED (site exists, challenge blocks us):** Olymel s.e.c / l.p (82); Cargill Ltd. (21); Cargill Meat Solutions, Guelph (14)
+
+**NO-SITE-FOUND:** Weil's Food Processing Ltd. (65); Usine de congélation de St-Bruno Inc, (64); Countryside Canners Co. Ltd. (45); East Coast Wild Blueberry Limited (25); Aliments Asta inc. (14)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

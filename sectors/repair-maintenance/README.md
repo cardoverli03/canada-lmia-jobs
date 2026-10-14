@@ -55,3 +55,16 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 7 hirers by approved positions (see `data/hunt/2026-10-14_repair-maintenance_batch16.csv` for full evidence):
+
+**ACTIVE — live hiring channels:**
+- **PNEUS D.M.R. INC.** (8 pos) — https://www.pneusdmr.ca/offre-d-emploi
+
+**BOT-WALLED (site exists, challenge blocks us):** Eagle Copters Maintenance Ltd. (8); Totem Lodge Ltd (3)
+
+**NO-SITE-FOUND:** Powell Fabrication & Mfg. LLC (4); M1 Composites Technologie (4); 9079-2151 Québec inc. (2); Baie Ste Anne Seafoods (2014) Inc. (3)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

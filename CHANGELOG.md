@@ -9,6 +9,12 @@ All notable changes to this repo. Dates use YYYY-MM-DD (owner timezone: Africa/D
 - Hunt batch 03 (construction top 15): 4 ACTIVE — Contour Earthmoving (7 operator roles listed on careers form), Rulam Contracting (careers form + Acheson AB address match via FOIP notice), Rafat General Contractor (accepting resumes all positions), Classic Landscapes (live resume form, Edmonton). 1 UNREACHABLE (EVR Operations / Elk Valley Resources), 4 BOT-WALLED, 2 WRONG-SITE-LOOKALIKE (carmacks.ca = Yukon village; cemrock.com = Tucson AZ), 1 NO-PUBLIC-CHANNEL, 3 NO-SITE-FOUND. Log: `data/hunt/2026-10-14_construction_batch03.csv`.
 - OWNER DECISION — skilled/unskilled separation: pipeline v4 rebuilds every sector as two separate file series (`<sector>-skilled-partNN.csv` TEER 0-3, `<sector>-unskilled-partNN.csv` TEER 4-5), max 200 rows each, never mixed. All 16 sectors regenerated: 59 files, 8,164 rows (5,847 SKILLED + 2,943 UNSKILLED). Legacy mixed part files removed. READMEs list the Files inventory per level; hunt/verification sections preserved.
 
+## 2026-10-14 (session 4)
+
+- FILTERING STAGE COMPLETE: hunt batches 05-16 executed across all 12 remaining sectors; 29 new ACTIVE badges with evidence URLs. 16 hunt logs total in data/hunt/ (one per sector).
+- Highlights: Nortera (65-position board, re-stamped), Fruit d'Or (10 opportunities), Avico (400+ staff poultry), Atlas Molded Products (ADP portal + Sainte-Marie QC address match), Ontario Shipyards, PBM (permanent postings), La Charpenterie (POSTULER form), CHUM (Candidats hors Québec), Alberta Health Services, Desjardins, Amazon Vancouver, COFOMO, Loblaws, AMD/ATI, EA, Fortinet, Concordia, McGill (legal-name match: Royal Institute for the Advancement of Learning), UManitoba, Netflix, Sony Imageworks x2, Disney Animation Vancouver (Burbank+Vancouver openings), Anita Norris Models (Get Scouted form), Laura Canada, PNEUS DMR.
+- Honest gaps documented: Job Bank tarpit persists (PENDING-JOBBANK in all logs); bot-walled giants (Olymel, Cascades, Maibec, Groupe Ferti, Cape Bald Packers) flagged for retry from another network; lookalikes excluded (lacharpenterie.com=France, captaindans.ca=restaurant, nextlevelchildcare.com=Edmonton, wellhealth.ca=Beespoke, asta.ca=for-sale).
+- Sector READMEs updated with per-sector Verification sections.
 ## 2026-10-13
 
 - Project initialized: repo skeleton, BIBLE.md, README.md, provenance docs.

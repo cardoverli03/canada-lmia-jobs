@@ -49,3 +49,24 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 12 hirers by approved positions (see `data/hunt/2026-10-14_education-teaching_batch13.csv` for full evidence):
+
+**ACTIVE — live hiring channels:**
+- **Université Concordia** (9 pos) — https://www.concordia.ca/hr/jobs.html
+- **Royal Institute for the Advancement of Learning** (7 pos) — https://www.mcgill.ca/careers
+- **University of Manitoba** (4 pos) — https://umanitoba.ca/careers
+
+**NO-PUBLIC-CHANNEL:** CORPORATION DE L'ECOLE DES HAUTES ETUDES COMMERCIALES DE MONTREAL (6 pos)
+
+**BOT-WALLED (site exists, challenge blocks us):** Northern Lights School Division No. 113 (8); University of Alberta (5); University of Calgary (5)
+
+**UNREACHABLE:** University of British Columbia, Faculty Relations (14); University of Toronto (6)
+
+**WRONG-SITE-LOOKALIKE (excluded as evidence):** Next Level Childcare Fraser Valley Inc.
+
+**NO-SITE-FOUND:** Garden Hill Education Authority (7); Centre de services scolaire de la Pointe-de-l’île (4)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

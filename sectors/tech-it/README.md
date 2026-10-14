@@ -59,3 +59,24 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 12 hirers by approved positions (see `data/hunt/2026-10-14_tech-it_batch12.csv` for full evidence):
+
+**ACTIVE — live hiring channels:**
+- **Groupe Technologies Desjardins inc.** (13 pos) — https://www.desjardins.com/en/careers.html
+- **Amazon Development Centre Canada ULC** (10 pos) — https://www.amazon.jobs/en/search?loc_query=Vancouver,+British+Columbia,+Canada
+- **COFOMO DÉVELOPPEMENT INC.** (10 pos) — https://www.cofomo.com/en/careers/
+- **Loblaws Inc.** (9 pos) — https://careers.loblaw.ca/
+- **ATI Technologies ULC** (8 pos) — https://www.amd.com/careers
+- **Electronic Arts (Canada), Inc.** (7 pos) — https://www.ea.com/careers
+- **Fortinet Technologies (Canada) ULC** (7 pos) — https://www.fortinet.com/corporate/careers
+
+**NO-PUBLIC-CHANNEL:** Ebates Canada, Inc. (8 pos)
+
+**BOT-WALLED (site exists, challenge blocks us):** Autodesk Canada Co. (12)
+
+**UNREACHABLE:** CGI Information Systems & Management Consultants Inc. (12); Conseillers en gestion et informatique CGI Inc. (8); ALTEN Canada Inc (0)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

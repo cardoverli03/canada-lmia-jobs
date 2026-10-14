@@ -50,3 +50,13 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 10 hirers by approved positions (see `data/hunt/2026-10-14_beauty-personal-services_batch14.csv` for full evidence):
+
+**UNREACHABLE:** Chatters Limited Partnership (4)
+
+**NO-SITE-FOUND:** 102007572 Saskatchewan Ltd (6); 16842909 Canada Inc (5); 2146342 Alberta Ltd (4); Afro Hair Studio (4); Kam-Cut Holdings LTD (3); Sonu Hair Cut Ltd. (3); TMB Crescendo Investments Limited (3); BAD HABIT TATTOO CO. LTD. (2); Hidden Gem Tattoo Studio (2)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

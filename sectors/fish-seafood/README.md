@@ -55,3 +55,15 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 11 hirers by approved positions (see `data/hunt/2026-10-14_fish-seafood_batch07.csv` for full evidence):
+
+**NO-PUBLIC-CHANNEL:** Icewater Seafoods Inc. (96 pos)
+
+**BOT-WALLED (site exists, challenge blocks us):** Cape Bald Packers Ltd (357); NOCA Canadian Seafood Buyer, Inc. (220); Captain Dan's Inc. (151); Pecheries Cheticamp Fisheries Intl. (2016) Ltd (126)
+
+**NO-SITE-FOUND:** 11656520 Canada Inc. (265); Baie Ste Anne Seafoods (2014) Inc. (181); Phillips Bridge Seafood ULC (178); Barry Group Inc (110); Lelièvre, Lelièvre et Lemoignan Ltée. (98); North Nova Seafoods (90)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

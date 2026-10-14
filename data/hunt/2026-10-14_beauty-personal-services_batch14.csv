@@ -1,0 +1,11 @@
+Rank,Employer,City,Province,ApprovedPositions,Method,SourceChecked,Result,Verdict,EvidenceURL,VerifiedDate,Notes
+1,"102007572 Saskatchewan Ltd",Saskatoon,SK,6,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"Numbered company"
+2,"16842909 Canada Inc",Ottawa,ON,5,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"Numbered company"
+3,"2146342 Alberta Ltd",Edmonton,AB,4,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"Numbered company"
+4,"Chatters Limited Partnership",Red Deer County,AB,4,direct-domain probe + browser/curl per SOP,https://chatters.ca,UNREACHABLE,UNREACHABLE,https://chatters.ca,2026-10-14,"Server returns 405 Not allowed to browser and curl (exists but refuses)"
+5,"Afro Hair Studio",Vancouver,BC,4,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"afrohairstudio.ca = parked lander"
+6,"Kam-Cut Holdings LTD",Kelowna,BC,3,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"kamcut.ca dead"
+7,"Sonu Hair Cut Ltd.",Delta,BC,3,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"sonuhair.ca dead"
+8,"TMB Crescendo Investments Limited",Vancouver,BC,3,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"No name-sensible domain found"
+9,"BAD HABIT TATTOO CO. LTD.",Edmonton,AB,2,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"badhabittattoo.ca dead"
+10,"Hidden Gem Tattoo Studio",Edmonton,AB,2,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"hiddengemtattoo.ca dead"

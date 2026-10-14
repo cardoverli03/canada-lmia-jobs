@@ -1,0 +1,10 @@
+Rank,Employer,City,Province,ApprovedPositions,Method,SourceChecked,Result,Verdict,EvidenceURL,VerifiedDate,Notes
+1,"Placement Parfait",Brossard,QC,4,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"placementparfait.com dead"
+2,"R. N. Apex Solutions Ltd",Dartmouth,NS,2,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"No name-sensible domain found"
+3,"Sioux Lookout Meno Ya Win Health Centre",Sioux Lookout,ON,2,direct-domain probe + browser/curl per SOP,https://slmhc.on.ca,BOT-WALLED,BOT-WALLED,https://slmhc.on.ca,2026-10-14,"'One moment, please...' bot interstitial"
+4,"PEL Chartered Professional Accountants Inc.",BURNABY,BC,3,direct-domain probe + browser/curl per SOP,https://pelcpa.ca,BOT-WALLED,BOT-WALLED,https://pelcpa.ca,2026-10-14,"'One moment, please...' bot interstitial"
+5,"Punjab Milk Foods Inc.",Surrey,BC,3,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"punjabmilkfoods.com/.ca dead"
+6,"Congdon's Aid To Daily Living Ltd o/a Congdon's Aid To Daily Living Ltd",Edmonton,AB,2,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"Small distributor without public web estate"
+7,"North 67 transport Inc",Leduc,AB,2,reuse previous batch,https://north67transport.com,NO-SITE-FOUND,NO-SITE-FOUND,https://north67transport.com,2026-10-14,"Reuse batch 04 evidence: north67transport.com = 'Coming Soon' placeholder"
+8,"Supreme Security",Calagay,AB,2,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"No name-sensible domain found"
+9,"Hecate Strait Employment Development Society",Prince Rupert,BC,2,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"No name-sensible domain found"

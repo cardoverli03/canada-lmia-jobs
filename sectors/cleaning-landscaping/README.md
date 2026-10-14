@@ -61,3 +61,19 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 11 hirers by approved positions (see `data/hunt/2026-10-14_cleaning-landscaping_batch10.csv` for full evidence):
+
+**ACTIVE — live hiring channels:**
+- **ClubLink Corporation ULC** (39 pos) — https://clublink.ca/about/employment/opportunities/
+- **Orange Paysagement Inc** (18 pos) — https://www.orangepaysagement.com
+
+**NO-PUBLIC-CHANNEL:** Sandhill Nursery (2002) Inc (17 pos); Pelouses et Entretien Soucy Inc (15 pos)
+
+**BOT-WALLED (site exists, challenge blocks us):** Groupe Ferti (42); SERVICE D'ENTRETIEN TERONET INC (15); Watermark Hospitality Management Inc. (14)
+
+**NO-SITE-FOUND:** 9414-3237 Québec inc. (26); Gazon Pro (19); 9318-4901 Québec inc. (16); Spirit Ridge Owner Association (15)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

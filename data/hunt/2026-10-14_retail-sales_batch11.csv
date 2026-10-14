@@ -1,0 +1,9 @@
+Rank,Employer,City,Province,ApprovedPositions,Method,SourceChecked,Result,Verdict,EvidenceURL,VerifiedDate,Notes
+1,"JPT Gamble Enterprises Ltd.",Penticton,BC,5,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"jptgamble.com/.ca dead"
+2,"2857-4077 Québec Inc.",Shawinigan,QC,5,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"Numbered company"
+3,"PRAKM Ventures Ltd.",Kenora,ON,5,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"prakm.ca dead"
+4,"DARS Brothers Ltd",Llyodminister,AB,6,direct-domain probe + browser/curl per SOP,https://darsbrothers.com,BOT-WALLED,BOT-WALLED,https://darsbrothers.com,2026-10-14,"Browser: 'Access to darsbrothers.com was denied'"
+5,"H.A.L.T. HOLDINGS LTD",Nanaimo,BC,6,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"halt.ca dead"
+6,"Lovely Imports and Retails Ltd",North York,ON,5,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"No name-sensible domain found"
+7,"Two Bay Enterprizes Limited",Moosonee,ON,5,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"twobay.ca + variants dead"
+8,"AMPVIC Development  Inc.",Langley,BC,4,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"No name-sensible domain found"

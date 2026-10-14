@@ -62,3 +62,13 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 9 hirers by approved positions (see `data/hunt/2026-10-14_office-admin_batch09.csv` for full evidence):
+
+**BOT-WALLED (site exists, challenge blocks us):** Sioux Lookout Meno Ya Win Health Centre (2); PEL Chartered Professional Accountants Inc. (3)
+
+**NO-SITE-FOUND:** Placement Parfait (4); R. N. Apex Solutions Ltd (2); Punjab Milk Foods Inc. (3); Congdon's Aid To Daily Living Ltd o/a Congdon's Aid To Daily Living Ltd (2); North 67 transport Inc (2); Supreme Security (2); Hecate Strait Employment Development Society (2)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

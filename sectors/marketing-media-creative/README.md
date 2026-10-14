@@ -60,3 +60,25 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 12 hirers by approved positions (see `data/hunt/2026-10-14_marketing-media-creative_batch15.csv` for full evidence):
+
+**ACTIVE — live hiring channels:**
+- **Anita Norris Model Managment INC** (11 pos) — https://www.anm-mgmt.com/get-scouted
+- **Les Films Sony Imageworks Quebec Inc** (12 pos) — https://www.imageworks.com
+- **Netflix Animation Studios Canada ULC** (10 pos) — https://jobs.netflix.com/
+- **Sony Pictures Imageworks Canada Inc.** (10 pos) — https://www.imageworks.com
+- **Walt Disney Animation Studios Vancouver** (9 pos) — https://www.disneyanimation.com/careers/
+- **Laura Canada** (4 pos) — https://laura.ca/pages/careers
+
+**NO-PUBLIC-CHANNEL:** Reitmans Canada LTD (11 pos)
+
+**BOT-WALLED (site exists, challenge blocks us):** Groupe Dynamite (16); La Maison Simons Inc (7)
+
+**UNREACHABLE:** LULULEMON ATHLETICA CANADA INC. (6)
+
+**NO-SITE-FOUND:** Axis Well Technology Ltd. (14); Discovery Talent Services, LLC (8)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

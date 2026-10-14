@@ -59,3 +59,13 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 8 hirers by approved positions (see `data/hunt/2026-10-14_retail-sales_batch11.csv` for full evidence):
+
+**BOT-WALLED (site exists, challenge blocks us):** DARS Brothers Ltd (6)
+
+**NO-SITE-FOUND:** JPT Gamble Enterprises Ltd. (5); 2857-4077 Québec Inc. (5); PRAKM Ventures Ltd. (5); H.A.L.T. HOLDINGS LTD (6); Lovely Imports and Retails Ltd (5); Two Bay Enterprizes Limited (5); AMPVIC Development  Inc. (4)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

@@ -63,3 +63,17 @@
 ## Check it yourself (built into every part file)
 
 Every row carries two ready-made links: JobBankCheck (opens Job Bank pre-filled with a quoted search for that employer, newest first) and WebSearch (finds the employer's official site / careers page). Click, look, decide. An approved LMIA is NOT a promise of a current opening - the links are how you check the live situation in seconds.
+
+## Verification (the hunt)
+
+Verified 2026-10-14 — top 12 hirers by approved positions (see `data/hunt/2026-10-14_healthcare-nursing_batch08.csv` for full evidence):
+
+**ACTIVE — live hiring channels:**
+- **Alberta Health Services** (25 pos) — https://www.albertahealthservices.ca/careers/Page12040.aspx
+- **Centre hospitalier de l'Université de Montréal** (16 pos) — https://www.chumontreal.qc.ca/le-chum-votre-hopital/carrieres-stages
+
+**BOT-WALLED (site exists, challenge blocks us):** WELL Health Clinic Network (11)
+
+**NO-SITE-FOUND:** Blessing home care and group home ltd (10); AGTA Home Health Care and Nursing Inc (10); Construction Bernard Bordeleau (16); Hearthstone Community Group, Inc. (8); Centre Intégré universitaire de santé et service sociaux de la Capitale-Nationale (15); Dr. Julie Wilson Inc. (14); Centre intégré universitaire de santé et de services sociaux de la Mauricie-et-du-Centre-du-Québec (14); ADEJUMO MEDICINE PROFESSIONAL CORPORATION (10); CISSS de Chaudière-Appalaches (10)
+
+Job Bank cross-check still blocked from our network (tarpit) — every row's `JobBankCheck` link does this check from YOUR device in seconds.

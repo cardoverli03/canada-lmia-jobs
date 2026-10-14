@@ -1,0 +1,8 @@
+Rank,Employer,City,Province,ApprovedPositions,Method,SourceChecked,Result,Verdict,EvidenceURL,VerifiedDate,Notes
+1,"PNEUS D.M.R. INC.",St-Augustin-de-Desmaures,QC,8,direct-domain probe + browser/curl per SOP,https://www.pneusdmr.ca/offre-d-emploi,ACTIVE,ACTIVE,https://www.pneusdmr.ca/offre-d-emploi,2026-10-14,"Identity confirmed (Services de pneus Québec/Lévis/Portneuf); 'OFFRE D EMPLOI' page live"
+2,"Eagle Copters Maintenance Ltd.",Calgary,AB,8,direct-domain probe + browser/curl per SOP,https://eaglecopters.com,BOT-WALLED,BOT-WALLED,https://eaglecopters.com,2026-10-14,"Cloudflare security verification challenge"
+3,"Powell Fabrication & Mfg. LLC",St. Louis.,FOREIGN-HQ,4,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"powellfab.com dead; FOREIGN-HQ row"
+4,"M1 Composites Technologie",Laval,QC,4,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"m1composites.ca blocked-by-client + .com dead"
+5,"9079-2151 Québec inc.",Sherbrooke,QC,2,direct-domain probe + browser/curl per SOP,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"Numbered company"
+6,"Baie Ste Anne Seafoods (2014) Inc.",Escuminac,NB,3,reuse previous batch,,NO-SITE-FOUND,NO-SITE-FOUND,,2026-10-14,"Reuse batch 07 evidence for same employer"
+7,"Totem Lodge Ltd",Sioux Narrows,ON,3,reuse previous batch,https://totemlodge.com,BOT-WALLED,BOT-WALLED,https://totemlodge.com,2026-10-14,"Reuse batch 02 evidence (2026-10-14): Cloudflare challenge"
