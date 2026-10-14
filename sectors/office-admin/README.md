@@ -1,10 +1,22 @@
 # OFFICE-ADMIN - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **329** | Unique employers: **317** | Parts: **2** (max 200 each)
+- Total entries: **329** | Unique employers: **317**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 2 part(s)** (321 rows), **UNSKILLED: 1 part(s)** (8 rows) — max 200 rows per file
 - Skill split: SKILLED 321, UNSKILLED 8 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 2109 postings, 2306 vacancies, median wage ~$26.54/hr equivalent
   - Postings by province: Québec 563, Ontario 525, British Columbia 369
+
+## Files
+
+**SKILLED** (TEER 0-3), 321 entries:
+
+- `office-admin-skilled-part01.csv`
+- `office-admin-skilled-part02.csv`
+
+**UNSKILLED** (TEER 4-5), 8 entries:
+
+- `office-admin-unskilled-part01.csv`
 
 ## Entries by province
 

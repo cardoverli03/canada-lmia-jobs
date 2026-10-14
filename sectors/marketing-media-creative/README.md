@@ -1,10 +1,22 @@
 # MARKETING-MEDIA-CREATIVE - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **229** | Unique employers: **220** | Parts: **2** (max 200 each)
+- Total entries: **229** | Unique employers: **220**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 2 part(s)** (218 rows), **UNSKILLED: 1 part(s)** (11 rows) — max 200 rows per file
 - Skill split: SKILLED 218, UNSKILLED 11 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 571 postings, 644 vacancies, median wage ~$36.0/hr equivalent
   - Postings by province: Ontario 201, British Columbia 120, Québec 110
+
+## Files
+
+**SKILLED** (TEER 0-3), 218 entries:
+
+- `marketing-media-creative-skilled-part01.csv`
+- `marketing-media-creative-skilled-part02.csv`
+
+**UNSKILLED** (TEER 4-5), 11 entries:
+
+- `marketing-media-creative-unskilled-part01.csv`
 
 ## Entries by province
 

@@ -1,10 +1,17 @@
 # EDUCATION-TEACHING - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **86** | Unique employers: **82** | Parts: **1** (max 200 each)
+- Total entries: **86** | Unique employers: **82**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 1 part(s)** (86 rows), **UNSKILLED: 0 part(s)** (0 rows) — max 200 rows per file
 - Skill split: SKILLED 86 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 809 postings, 1170 vacancies, median wage ~$26.8/hr equivalent
   - Postings by province: Ontario 376, Québec 184, British Columbia 117
+
+## Files
+
+**SKILLED** (TEER 0-3), 86 entries:
+
+- `education-teaching-skilled-part01.csv`
 
 ## Entries by province
 

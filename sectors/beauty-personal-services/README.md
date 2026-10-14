@@ -1,10 +1,17 @@
 # BEAUTY-PERSONAL-SERVICES - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **92** | Unique employers: **89** | Parts: **1** (max 200 each)
+- Total entries: **92** | Unique employers: **89**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 1 part(s)** (92 rows), **UNSKILLED: 0 part(s)** (0 rows) — max 200 rows per file
 - Skill split: SKILLED 92 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 656 postings, 864 vacancies, median wage ~$22.68/hr equivalent
   - Postings by province: Ontario 183, British Columbia 159, Alberta 131
+
+## Files
+
+**SKILLED** (TEER 0-3), 92 entries:
+
+- `beauty-personal-services-skilled-part01.csv`
 
 ## Entries by province
 

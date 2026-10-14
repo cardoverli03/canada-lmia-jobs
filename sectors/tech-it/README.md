@@ -1,10 +1,19 @@
 # TECH-IT - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **570** | Unique employers: **468** | Parts: **3** (max 200 each)
+- Total entries: **570** | Unique employers: **468**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 3 part(s)** (570 rows), **UNSKILLED: 0 part(s)** (0 rows) — max 200 rows per file
 - Skill split: SKILLED 570 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 1029 postings, 1265 vacancies, median wage ~$40.07/hr equivalent
   - Postings by province: Ontario 524, Québec 260, British Columbia 121
+
+## Files
+
+**SKILLED** (TEER 0-3), 570 entries:
+
+- `tech-it-skilled-part01.csv`
+- `tech-it-skilled-part02.csv`
+- `tech-it-skilled-part03.csv`
 
 ## Entries by province
 

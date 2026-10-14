@@ -1,10 +1,26 @@
 # CONSTRUCTION - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **1133** | Unique employers: **1069** | Parts: **6** (max 200 each)
+- Total entries: **1133** | Unique employers: **1069**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 6 part(s)** (1028 rows), **UNSKILLED: 1 part(s)** (105 rows) — max 200 rows per file
 - Skill split: SKILLED 1028, UNSKILLED 105 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 4654 postings, 8348 vacancies, median wage ~$34.45/hr equivalent
   - Postings by province: Ontario 1163, British Columbia 1093, Alberta 861
+
+## Files
+
+**SKILLED** (TEER 0-3), 1028 entries:
+
+- `construction-skilled-part01.csv`
+- `construction-skilled-part02.csv`
+- `construction-skilled-part03.csv`
+- `construction-skilled-part04.csv`
+- `construction-skilled-part05.csv`
+- `construction-skilled-part06.csv`
+
+**UNSKILLED** (TEER 4-5), 105 entries:
+
+- `construction-unskilled-part01.csv`
 
 ## Entries by province
 

@@ -1,10 +1,21 @@
 # FISH-SEAFOOD - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **64** | Unique employers: **58** | Parts: **1** (max 200 each)
+- Total entries: **64** | Unique employers: **58**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 1 part(s)** (2 rows), **UNSKILLED: 1 part(s)** (62 rows) — max 200 rows per file
 - Skill split: UNSKILLED 62, SKILLED 2 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 45 postings, 2028 vacancies, median wage ~$18.0/hr equivalent
   - Postings by province: Newfoundland and Labrador 11, Nova Scotia 11, Prince Edward Island 9
+
+## Files
+
+**SKILLED** (TEER 0-3), 2 entries:
+
+- `fish-seafood-skilled-part01.csv`
+
+**UNSKILLED** (TEER 4-5), 62 entries:
+
+- `fish-seafood-unskilled-part01.csv`
 
 ## Entries by province
 

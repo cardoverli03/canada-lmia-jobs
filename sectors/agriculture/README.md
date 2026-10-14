@@ -1,10 +1,31 @@
 # AGRICULTURE - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **2270** | Unique employers: **2141** | Parts: **12** (max 200 each)
+- Total entries: **2270** | Unique employers: **2141**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 1 part(s)** (181 rows), **UNSKILLED: 11 part(s)** (2089 rows) — max 200 rows per file
 - Skill split: UNSKILLED 2089, SKILLED 181 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 2115 postings, 17999 vacancies, median wage ~$17.95/hr equivalent
   - Postings by province: Québec 833, Ontario 546, British Columbia 399
+
+## Files
+
+**SKILLED** (TEER 0-3), 181 entries:
+
+- `agriculture-skilled-part01.csv`
+
+**UNSKILLED** (TEER 4-5), 2089 entries:
+
+- `agriculture-unskilled-part01.csv`
+- `agriculture-unskilled-part02.csv`
+- `agriculture-unskilled-part03.csv`
+- `agriculture-unskilled-part04.csv`
+- `agriculture-unskilled-part05.csv`
+- `agriculture-unskilled-part06.csv`
+- `agriculture-unskilled-part07.csv`
+- `agriculture-unskilled-part08.csv`
+- `agriculture-unskilled-part09.csv`
+- `agriculture-unskilled-part10.csv`
+- `agriculture-unskilled-part11.csv`
 
 ## Entries by province
 

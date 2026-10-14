@@ -1,10 +1,21 @@
 # FOOD-PROCESSING - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **124** | Unique employers: **104** | Parts: **1** (max 200 each)
+- Total entries: **124** | Unique employers: **104**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 1 part(s)** (29 rows), **UNSKILLED: 1 part(s)** (95 rows) — max 200 rows per file
 - Skill split: UNSKILLED 95, SKILLED 29 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 271 postings, 1649 vacancies, median wage ~$21.04/hr equivalent
   - Postings by province: Québec 131, British Columbia 45, Ontario 43
+
+## Files
+
+**SKILLED** (TEER 0-3), 29 entries:
+
+- `food-processing-skilled-part01.csv`
+
+**UNSKILLED** (TEER 4-5), 95 entries:
+
+- `food-processing-unskilled-part01.csv`
 
 ## Entries by province
 

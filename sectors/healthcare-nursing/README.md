@@ -1,10 +1,22 @@
 # HEALTHCARE-NURSING - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **376** | Unique employers: **354** | Parts: **2** (max 200 each)
+- Total entries: **376** | Unique employers: **354**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 2 part(s)** (364 rows), **UNSKILLED: 1 part(s)** (12 rows) — max 200 rows per file
 - Skill split: SKILLED 364, UNSKILLED 12 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 4560 postings, 6232 vacancies, median wage ~$27.0/hr equivalent
   - Postings by province: Ontario 1401, Saskatchewan 1277, British Columbia 602
+
+## Files
+
+**SKILLED** (TEER 0-3), 364 entries:
+
+- `healthcare-nursing-skilled-part01.csv`
+- `healthcare-nursing-skilled-part02.csv`
+
+**UNSKILLED** (TEER 4-5), 12 entries:
+
+- `healthcare-nursing-unskilled-part01.csv`
 
 ## Entries by province
 

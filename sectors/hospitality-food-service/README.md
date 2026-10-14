@@ -1,10 +1,26 @@
 # HOSPITALITY-FOOD-SERVICE - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **1239** | Unique employers: **1146** | Parts: **7** (max 200 each)
+- Total entries: **1239** | Unique employers: **1146**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 6 part(s)** (1132 rows), **UNSKILLED: 1 part(s)** (107 rows) — max 200 rows per file
 - Skill split: SKILLED 1132, UNSKILLED 107 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 8150 postings, 12743 vacancies, median wage ~$20.15/hr equivalent
   - Postings by province: Ontario 2056, British Columbia 2040, Québec 1195
+
+## Files
+
+**SKILLED** (TEER 0-3), 1132 entries:
+
+- `hospitality-food-service-skilled-part01.csv`
+- `hospitality-food-service-skilled-part02.csv`
+- `hospitality-food-service-skilled-part03.csv`
+- `hospitality-food-service-skilled-part04.csv`
+- `hospitality-food-service-skilled-part05.csv`
+- `hospitality-food-service-skilled-part06.csv`
+
+**UNSKILLED** (TEER 4-5), 107 entries:
+
+- `hospitality-food-service-unskilled-part01.csv`
 
 ## Entries by province
 

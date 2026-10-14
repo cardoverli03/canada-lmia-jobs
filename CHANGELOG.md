@@ -2,6 +2,13 @@
 
 All notable changes to this repo. Dates use YYYY-MM-DD (owner timezone: Africa/Dar_es_Salaam).
 
+## 2026-10-14 (session 3)
+
+- Sandbox was wiped between sessions; full state recovered via anonymous clone from GitHub (repo public, 46MB purge verified live).
+- Hunt batch 02 (hospitality-food-service top 15): 3 ACTIVE — North American Midway Entertainment (live application form), ClubLink (live job board, F&B Manager roles), Empress Hotel Operations / Fairmont Empress Victoria (dated "Journey Person Cook FT" posting via Accor careers). 1 NO-PUBLIC-CHANNEL, 3 BOT-WALLED, 1 WRONG-SITE-LOOKALIKE (rjconcessions.com = Sarasota FL), 8 NO-SITE-FOUND. Log: `data/hunt/2026-10-14_hospitality-food-service_batch02.csv`.
+- Hunt batch 03 (construction top 15): 4 ACTIVE — Contour Earthmoving (7 operator roles listed on careers form), Rulam Contracting (careers form + Acheson AB address match via FOIP notice), Rafat General Contractor (accepting resumes all positions), Classic Landscapes (live resume form, Edmonton). 1 UNREACHABLE (EVR Operations / Elk Valley Resources), 4 BOT-WALLED, 2 WRONG-SITE-LOOKALIKE (carmacks.ca = Yukon village; cemrock.com = Tucson AZ), 1 NO-PUBLIC-CHANNEL, 3 NO-SITE-FOUND. Log: `data/hunt/2026-10-14_construction_batch03.csv`.
+- OWNER DECISION — skilled/unskilled separation: pipeline v4 rebuilds every sector as two separate file series (`<sector>-skilled-partNN.csv` TEER 0-3, `<sector>-unskilled-partNN.csv` TEER 4-5), max 200 rows each, never mixed. All 16 sectors regenerated: 59 files, 8,164 rows (5,847 SKILLED + 2,943 UNSKILLED). Legacy mixed part files removed. READMEs list the Files inventory per level; hunt/verification sections preserved.
+
 ## 2026-10-13
 
 - Project initialized: repo skeleton, BIBLE.md, README.md, provenance docs.

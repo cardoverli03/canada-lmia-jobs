@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Cardo Careers - sector filtering pipeline v2
+Cardo Careers - sector filtering pipeline v4
 ============================================
 Input : data/raw/tfwp_2026q1_pos_en.xlsx      (ESDC TFWP Positive LMIA Employers List, EN)
         data/raw/ircc-noc2021-teer.csv        (IRCC official NOC 2021 -> TEER table, 516 codes)
@@ -8,13 +8,16 @@ Input : data/raw/tfwp_2026q1_pos_en.xlsx      (ESDC TFWP Positive LMIA Employers
 Output: data/processed/tfwp_2026q1_clean.csv  (full cleaned dataset, sector + TEER + SkillLevel tagged)
         data/processed/job-bank-sept2026-slim.csv
         data/processed/unassigned_review.csv  (leftovers to inspect)
-        sectors/<name>/<name>-partNN.csv      (max 200 rows per part)
+        sectors/<name>/<name>-skilled-partNN.csv    (TEER 0-3, max 200 rows per part)
+        sectors/<name>/<name>-unskilled-partNN.csv  (TEER 4-5, max 200 rows per part)
         sectors/<name>/README.md              (live stats: provinces, jobs, hirers, market signal)
 
 Rules (see BIBLE.md):
   - English only. One row = one approved LMIA entry (employer + occupation + location).
   - Max 200 entries per part. Parts sorted Province -> positions desc -> employer.
   - SkillLevel: TEER 0-3 = SKILLED, TEER 4-5 = UNSKILLED (source: IRCC official table).
+  - SKILLED and UNSKILLED ship as SEPARATE file series inside each sector folder
+    (owner decision 2026-10-14: buyers shop by skill level; never mixed in one file).
   - Sector = NOC list match first, keyword fallback second. Leftovers stay unassigned.
 """
 
@@ -317,11 +320,30 @@ def export_sector(df, sector, jb):
         "JobBankCheck", "WebSearch",
     ]
 
-    n_parts = 0
-    for start in range(0, len(sub), MAX_PART_ROWS):
-        chunk = sub.iloc[start : start + MAX_PART_ROWS]
-        n_parts += 1
-        chunk[cols].to_csv(os.path.join(out_dir, f"{sector}-part{n_parts:02d}.csv"), index=False)
+    # Owner decision 2026-10-14: SKILLED and UNSKILLED are separate file series.
+    # Buyers shop by skill level — never mixed in one file.
+    # Remove legacy mixed part files from earlier pipeline versions.
+    for old_name in os.listdir(out_dir):
+        if old_name.startswith(f"{sector}-part") and old_name.endswith(".csv"):
+            os.remove(os.path.join(out_dir, old_name))
+
+    part_files = {}   # level -> list of generated filenames
+    for level in ("SKILLED", "UNSKILLED"):
+        lvl = sub[sub["SkillLevel"] == level].copy()
+        lvl = lvl.sort_values(
+            ["Province/Territory", "Approved Positions", "Employer"],
+            ascending=[True, False, True],
+            kind="mergesort",
+        ).reset_index(drop=True)
+        lvl["Entry"] = lvl.index + 1
+        names = []
+        for start in range(0, len(lvl), MAX_PART_ROWS):
+            chunk = lvl.iloc[start : start + MAX_PART_ROWS]
+            n = len(names) + 1
+            name = f"{sector}-{level.lower()}-part{n:02d}.csv"
+            chunk[cols].to_csv(os.path.join(out_dir, name), index=False)
+            names.append(name)
+        part_files[level] = names
 
     # README with live stats
     prov_counts = sub["ProvinceCode"].value_counts()
@@ -334,7 +356,15 @@ def export_sector(df, sector, jb):
     lines.append(f"# {sector.upper()} - Cardo Careers sector data")
     lines.append("")
     lines.append(f"- Source: ESDC TFWP Positive LMIA Employers List, {QUARTER} (English)")
-    lines.append(f"- Total entries: **{len(sub)}** | Unique employers: **{unique_emp}** | Parts: **{n_parts}** (max {MAX_PART_ROWS} each)")
+    lines.append(f"- Total entries: **{len(sub)}** | Unique employers: **{unique_emp}**")
+    lines.append(
+        "- Files (SKILLED and UNSKILLED are separate, never mixed): "
+        + ", ".join(
+            f"**{level}: {len(names)} part(s)** ({len(sub[sub['SkillLevel'] == level])} rows)"
+            for level, names in part_files.items()
+        )
+        + f" — max {MAX_PART_ROWS} rows per file"
+    )
     if len(skill):
         lines.append(f"- Skill split: " + ", ".join(f"{k} {v}" for k, v in skill.items()) + " (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)")
     if sector in SECTOR_DEFS:
@@ -343,6 +373,18 @@ def export_sector(df, sector, jb):
         if len(top_prov):
             lines.append("  - Postings by province: " + ", ".join(f"{p} {c}" for p, c in top_prov.items()))
     lines.append("")
+    lines.append("## Files")
+    lines.append("")
+    for level in ("SKILLED", "UNSKILLED"):
+        names = part_files[level]
+        if not names:
+            continue
+        n_rows = len(sub[sub["SkillLevel"] == level])
+        lines.append(f"**{level}** (TEER {'0-3' if level == 'SKILLED' else '4-5'}), {n_rows} entries:")
+        lines.append("")
+        for n in names:
+            lines.append(f"- `{n}`")
+        lines.append("")
     lines.append("## Entries by province")
     lines.append("")
     lines.append("| Province | Entries |")
@@ -383,7 +425,7 @@ def export_sector(df, sector, jb):
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-    return len(sub), n_parts
+    return len(sub), {level: len(names) for level, names in part_files.items()}
 
 
 def main():
@@ -417,7 +459,7 @@ def main():
     print()
     for sector in SECTOR_DEFS:
         total, parts = export_sector(df, sector, jb)
-        print(f"[{sector}] entries: {total} -> {parts} part files")
+        print(f"[{sector}] entries: {total} -> SKILLED {parts['SKILLED']} part(s), UNSKILLED {parts['UNSKILLED']} part(s)")
 
     print("\nDone.")
 

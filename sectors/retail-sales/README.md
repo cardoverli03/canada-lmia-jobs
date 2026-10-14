@@ -1,10 +1,22 @@
 # RETAIL-SALES - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **295** | Unique employers: **289** | Parts: **2** (max 200 each)
+- Total entries: **295** | Unique employers: **289**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 2 part(s)** (278 rows), **UNSKILLED: 1 part(s)** (17 rows) — max 200 rows per file
 - Skill split: SKILLED 278, UNSKILLED 17 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 1369 postings, 1536 vacancies, median wage ~$27.01/hr equivalent
   - Postings by province: Ontario 388, British Columbia 294, Québec 239
+
+## Files
+
+**SKILLED** (TEER 0-3), 278 entries:
+
+- `retail-sales-skilled-part01.csv`
+- `retail-sales-skilled-part02.csv`
+
+**UNSKILLED** (TEER 4-5), 17 entries:
+
+- `retail-sales-unskilled-part01.csv`
 
 ## Entries by province
 

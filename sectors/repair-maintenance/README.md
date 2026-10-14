@@ -1,10 +1,21 @@
 # REPAIR-MAINTENANCE - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **79** | Unique employers: **79** | Parts: **1** (max 200 each)
+- Total entries: **79** | Unique employers: **79**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 1 part(s)** (66 rows), **UNSKILLED: 1 part(s)** (13 rows) — max 200 rows per file
 - Skill split: SKILLED 66, UNSKILLED 13 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 612 postings, 782 vacancies, median wage ~$25.26/hr equivalent
   - Postings by province: Québec 192, Ontario 149, British Columbia 85
+
+## Files
+
+**SKILLED** (TEER 0-3), 66 entries:
+
+- `repair-maintenance-skilled-part01.csv`
+
+**UNSKILLED** (TEER 4-5), 13 entries:
+
+- `repair-maintenance-unskilled-part01.csv`
 
 ## Entries by province
 

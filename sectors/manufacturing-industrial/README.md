@@ -1,10 +1,23 @@
 # MANUFACTURING-INDUSTRIAL - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **527** | Unique employers: **491** | Parts: **3** (max 200 each)
+- Total entries: **527** | Unique employers: **491**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 3 part(s)** (433 rows), **UNSKILLED: 1 part(s)** (94 rows) — max 200 rows per file
 - Skill split: SKILLED 433, UNSKILLED 94 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 1874 postings, 3054 vacancies, median wage ~$29.5/hr equivalent
   - Postings by province: Québec 745, Ontario 584, British Columbia 212
+
+## Files
+
+**SKILLED** (TEER 0-3), 433 entries:
+
+- `manufacturing-industrial-skilled-part01.csv`
+- `manufacturing-industrial-skilled-part02.csv`
+- `manufacturing-industrial-skilled-part03.csv`
+
+**UNSKILLED** (TEER 4-5), 94 entries:
+
+- `manufacturing-industrial-unskilled-part01.csv`
 
 ## Entries by province
 

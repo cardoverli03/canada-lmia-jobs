@@ -1,10 +1,21 @@
 # CLEANING-LANDSCAPING - Cardo Careers sector data
 
 - Source: ESDC TFWP Positive LMIA Employers List, 2026-Q1 (English)
-- Total entries: **248** | Unique employers: **238** | Parts: **2** (max 200 each)
+- Total entries: **248** | Unique employers: **238**
+- Files (SKILLED and UNSKILLED are separate, never mixed): **SKILLED: 1 part(s)** (69 rows), **UNSKILLED: 1 part(s)** (179 rows) — max 200 rows per file
 - Skill split: UNSKILLED 179, SKILLED 69 (TEER 0-3 = SKILLED, 4-5 = UNSKILLED, source: IRCC)
 - Live market signal (Job Bank, September 2026): 1334 postings, 2647 vacancies, median wage ~$20.0/hr equivalent
   - Postings by province: Ontario 329, Québec 304, British Columbia 226
+
+## Files
+
+**SKILLED** (TEER 0-3), 69 entries:
+
+- `cleaning-landscaping-skilled-part01.csv`
+
+**UNSKILLED** (TEER 4-5), 179 entries:
+
+- `cleaning-landscaping-unskilled-part01.csv`
 
 ## Entries by province
 
